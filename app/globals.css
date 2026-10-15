@@ -80,3 +80,7 @@ body:has(.design-hero) .global-nav-shell{background:rgba(250,246,236,.9)}
 .design-hero-image{display:none}
 @media(max-width:820px){.design-hero{background-position:62% center}}
 @media(max-width:500px){.design-hero{background-position:64% center}}
+/* Final paint order: scenic image above fallback, tint above image, content above tint. */
+.design-hero-image{display:block;z-index:1}
+.design-hero-overlay{z-index:2}
+.design-hero-inner{z-index:3}
