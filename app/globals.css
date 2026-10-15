@@ -141,3 +141,13 @@ body:has(.design-hero) .global-site-header{position:fixed;top:0;left:0;right:0;p
   .global-mobile-menu a{padding:10px 11px;font-size:13px}
 }
 @media(max-width:380px){.global-brand-copy strong{font-size:17px}.global-nav-shell{width:calc(100% - 14px)}.global-logo-frame{width:30px;height:30px}}
+
+/* Bold bilingual navigation and lower hero slogan placement. */
+.global-nav-links a,.global-login,.global-cta{font-weight:800}
+.global-language{display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(23,63,53,.18);background:rgba(255,255,255,.5);color:#557066;border-radius:999px;padding:5px 8px;font-size:10px;letter-spacing:.02em;cursor:pointer}
+.global-language b{font-weight:800}.global-language b.selected{color:#173f35}.global-language span{opacity:.45}
+.global-mobile-language{border:1px solid #d7e4d5;background:#f5f8f1;color:#173f35;border-radius:9px;padding:10px 11px;text-align:left;font-size:13px;font-weight:800;cursor:pointer}
+.design-slogan{align-self:flex-end;margin:0 2% 5% 0;transform:rotate(-8deg) translateY(16px)}
+@media(max-width:1120px){.global-language{padding:4px 7px}.design-slogan{margin-right:1%;margin-bottom:4%;font-size:clamp(16px,2vw,25px)}}
+@media(max-width:820px){.global-language{display:none}.design-slogan{display:block;position:absolute;right:3%;bottom:37%;margin:0;font-size:17px;transform:rotate(-7deg)}}
+@media(max-width:500px){.design-slogan{right:3%;bottom:35%;font-size:14px}.design-slogan span{width:55px;margin-top:7px;margin-left:12px}}
