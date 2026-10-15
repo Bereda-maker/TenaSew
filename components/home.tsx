@@ -9,23 +9,21 @@ export function Home(){
   useEffect(()=>{const close=()=>setMenuOpen(false);const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')close()};document.addEventListener('keydown',onKey);document.addEventListener('click',close);return()=>{document.removeEventListener('keydown',onKey);document.removeEventListener('click',close)}},[]);
   const stop=(event:React.MouseEvent)=>event.stopPropagation();
   return <div className="landing-page">
-    <section className="cinematic-hero" aria-labelledby="hero-title">
-      <video className="hero-video" autoPlay loop muted playsInline poster="/tenasew-poster.svg" aria-hidden="true"><source src="/tenasew-hero.mp4" type="video/mp4"/></video>
-      <div className="hero-fallback" aria-hidden="true"/>
-      <div className="hero-shade" aria-hidden="true"/>
-      <div className="hero-layer">
-        <div className="hero-nav-wrap" onClick={stop}>
-          <div className="hero-nav-pill">
-            <Link href="/" className="hero-brand" aria-label="TenaSew home"><span className="hero-logo" aria-hidden="true"><span className="logo-person"/><span className="logo-leaf logo-leaf-one"/><span className="logo-leaf logo-leaf-two"/></span><span><b>TenaSew</b><small>ጤናሰው</small></span></Link>
-            <nav className="hero-desktop-links" aria-label="Primary"><Link href="/about">Our story</Link><Link href="/wellness">Wellness</Link><Link href="/ai">TenaSew AI</Link><Link href="/contact">Contact</Link></nav>
-            <div className="hero-nav-actions"><Link href="/register" className="hero-top-cta">Start Your Journey</Link><button className="hero-menu-toggle" aria-label={menuOpen?'Close menu':'Open menu'} aria-expanded={menuOpen} onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X size={20}/>:<Menu size={20}/>}</button></div>
-          </div>
-          {menuOpen&&<nav className="hero-mobile-menu" aria-label="Mobile navigation"><Link href="/about" onClick={()=>setMenuOpen(false)}>Our Story</Link><Link href="/wellness" onClick={()=>setMenuOpen(false)}>Wellness</Link><Link href="/wellness/confidence-without-comparison" onClick={()=>setMenuOpen(false)}>Body Confidence</Link><Link href="/about" onClick={()=>setMenuOpen(false)}>About TenaSew</Link><Link href="/contact" onClick={()=>setMenuOpen(false)}>Contact</Link><Link href="/register" className="hero-mobile-cta" onClick={()=>setMenuOpen(false)}>Start Your Journey <ArrowRight size={16}/></Link></nav>}
-        </div>
-        <div className="hero-content-shell">
-          <div className="hero-copy"><div className="hero-eyebrow">Your wellness. Your journey.</div><h1 id="hero-title">Your journey to feeling better <em>starts here.</em></h1><p>TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.</p><div className="hero-actions"><Link href="/register" className="hero-primary">Start Your Journey <ArrowRight size={17}/></Link><Link href="/wellness" className="hero-secondary">Explore Wellness</Link></div><p className="hero-trust">Founded in Ethiopia <span>·</span> Inclusive by design <span>·</span> No appearance scores</p><div className="hero-pills hero-pills-mobile"><span>Personalized Wellness</span><span>Body Confidence</span><span>AI-Powered Guidance</span></div></div>
-          <div className="hero-pills hero-pills-desktop" aria-label="TenaSew features"><span>Personalized Wellness</span><span>Body Confidence</span><span>AI-Powered Guidance</span></div>
-        </div>
+    <section className="reference-hero" aria-labelledby="reference-hero-title">
+      <img className="reference-hero-image" src="/tenasew-hero-reference.png" alt="TenaSew wellness journey: a woman enjoying a peaceful moment above a city landscape" />
+      <h1 id="reference-hero-title" className="sr-only">Your journey to feeling better starts here.</h1>
+      <div className="reference-hotspots" aria-label="Hero navigation">
+        <Link className="reference-hotspot hotspot-home" href="/" aria-label="Home"><span className="sr-only">Home</span></Link>
+        <Link className="reference-hotspot hotspot-wellness" href="/wellness" aria-label="Wellness"><span className="sr-only">Wellness</span></Link>
+        <Link className="reference-hotspot hotspot-confidence" href="/wellness/confidence-without-comparison" aria-label="Body Confidence"><span className="sr-only">Body Confidence</span></Link>
+        <Link className="reference-hotspot hotspot-ai" href="/ai" aria-label="AI Assistant"><span className="sr-only">AI Assistant</span></Link>
+        <Link className="reference-hotspot hotspot-resources" href="/wellness" aria-label="Resources"><span className="sr-only">Resources</span></Link>
+        <Link className="reference-hotspot hotspot-about" href="/about" aria-label="About"><span className="sr-only">About</span></Link>
+        <Link className="reference-hotspot hotspot-contact" href="/contact" aria-label="Contact"><span className="sr-only">Contact</span></Link>
+        <Link className="reference-hotspot hotspot-login" href="/login" aria-label="Log in"><span className="sr-only">Log in</span></Link>
+        <Link className="reference-hotspot hotspot-start" href="/register" aria-label="Start Your Journey"><span className="sr-only">Start Your Journey</span></Link>
+        <Link className="reference-hotspot hotspot-hero-start" href="/register" aria-label="Start Your Journey"><span className="sr-only">Start Your Journey</span></Link>
+        <Link className="reference-hotspot hotspot-explore" href="/wellness" aria-label="Explore Wellness"><span className="sr-only">Explore Wellness</span></Link>
       </div>
     </section>
     <section className="section"><div className="shell"><div className="section-head"><div><div className="eyebrow">Support that meets you where you are</div><h2>Your wellbeing is more than a before-and-after.</h2></div><p>Choose what matters to you. Skip what doesn’t. Change your direction as life changes.</p></div><div className="cards">{categories.map((c,i)=><div className="card" key={c.title}><div className="icon" aria-hidden="true">{c.symbol}</div><div className="number">0{i+1}</div><h3>{c.title}</h3><p>{c.text}</p></div>)}</div></div></section>
