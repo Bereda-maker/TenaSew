@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
-import {ArrowRight, BookOpen, Heart, Menu, ShieldCheck, Sparkles, Users, X} from 'lucide-react';
+import {ArrowRight, BookOpen, Heart, Menu, ShieldCheck, Sparkles, Users, X, Search} from 'lucide-react';
 import {categories, resources} from '../lib/data';
 
 export function Home(){
@@ -9,21 +9,22 @@ export function Home(){
   useEffect(()=>{const close=()=>setMenuOpen(false);const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')close()};document.addEventListener('keydown',onKey);document.addEventListener('click',close);return()=>{document.removeEventListener('keydown',onKey);document.removeEventListener('click',close)}},[]);
   const stop=(event:React.MouseEvent)=>event.stopPropagation();
   return <div className="landing-page">
-    <section className="reference-hero" aria-labelledby="reference-hero-title">
-      <img className="reference-hero-image" src="/tenasew-hero-reference.png" alt="TenaSew wellness journey: a woman enjoying a peaceful moment above a city landscape" />
-      <h1 id="reference-hero-title" className="sr-only">Your journey to feeling better starts here.</h1>
-      <div className="reference-hotspots" aria-label="Hero navigation">
-        <Link className="reference-hotspot hotspot-home" href="/" aria-label="Home"><span className="sr-only">Home</span></Link>
-        <Link className="reference-hotspot hotspot-wellness" href="/wellness" aria-label="Wellness"><span className="sr-only">Wellness</span></Link>
-        <Link className="reference-hotspot hotspot-confidence" href="/wellness/confidence-without-comparison" aria-label="Body Confidence"><span className="sr-only">Body Confidence</span></Link>
-        <Link className="reference-hotspot hotspot-ai" href="/ai" aria-label="AI Assistant"><span className="sr-only">AI Assistant</span></Link>
-        <Link className="reference-hotspot hotspot-resources" href="/wellness" aria-label="Resources"><span className="sr-only">Resources</span></Link>
-        <Link className="reference-hotspot hotspot-about" href="/about" aria-label="About"><span className="sr-only">About</span></Link>
-        <Link className="reference-hotspot hotspot-contact" href="/contact" aria-label="Contact"><span className="sr-only">Contact</span></Link>
-        <Link className="reference-hotspot hotspot-login" href="/login" aria-label="Log in"><span className="sr-only">Log in</span></Link>
-        <Link className="reference-hotspot hotspot-start" href="/register" aria-label="Start Your Journey"><span className="sr-only">Start Your Journey</span></Link>
-        <Link className="reference-hotspot hotspot-hero-start" href="/register" aria-label="Start Your Journey"><span className="sr-only">Start Your Journey</span></Link>
-        <Link className="reference-hotspot hotspot-explore" href="/wellness" aria-label="Explore Wellness"><span className="sr-only">Explore Wellness</span></Link>
+    <section className="design-hero" aria-labelledby="design-hero-title">
+      <video className="design-hero-video" autoPlay loop muted playsInline poster="/tenasew-poster.svg" aria-hidden="true"><source src="/tenasew-hero.mp4" type="video/mp4"/></video>
+      <div className="design-hero-overlay" aria-hidden="true"/>
+      <div className="design-hero-inner">
+        <div className="design-navbar" onClick={stop}>
+          <Link href="/" className="design-brand" aria-label="TenaSew home"><span className="design-brand-symbol" aria-hidden="true"><span className="design-symbol-person"/><span className="design-symbol-leaf leaf-a"/><span className="design-symbol-leaf leaf-b"/></span><span className="design-brand-name">TenaSew <span className="design-brand-amh">ጤናሰው</span></span></Link>
+          <nav className="design-nav-links" aria-label="Primary"><Link className="active" href="/">Home</Link><Link href="/wellness">Wellness</Link><Link href="/wellness/confidence-without-comparison">Body Confidence</Link><Link href="/ai">AI Assistant</Link><Link href="/wellness">Resources</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></nav>
+          <div className="design-nav-actions"><button className="design-search" aria-label="Search wellness resources" onClick={()=>window.location.href='/wellness'}><Search size={18}/></button><Link href="/login" className="design-login">Log In</Link><Link href="/register" className="design-start">Start Your Journey <ArrowRight size={16}/></Link><button className="design-menu" aria-label={menuOpen?'Close menu':'Open menu'} aria-expanded={menuOpen} onClick={()=>setMenuOpen(!menuOpen)}>{menuOpen?<X size={21}/>:<Menu size={21}/>}</button></div>
+          {menuOpen&&<nav className="design-mobile-menu" aria-label="Mobile navigation"><Link href="/" onClick={()=>setMenuOpen(false)}>Home</Link><Link href="/wellness" onClick={()=>setMenuOpen(false)}>Wellness</Link><Link href="/wellness/confidence-without-comparison" onClick={()=>setMenuOpen(false)}>Body Confidence</Link><Link href="/ai" onClick={()=>setMenuOpen(false)}>AI Assistant</Link><Link href="/wellness" onClick={()=>setMenuOpen(false)}>Resources</Link><Link href="/about" onClick={()=>setMenuOpen(false)}>About</Link><Link href="/contact" onClick={()=>setMenuOpen(false)}>Contact</Link><Link href="/register" className="mobile-start" onClick={()=>setMenuOpen(false)}>Start Your Journey <ArrowRight size={16}/></Link></nav>}
+        </div>
+        <div className="design-hero-content">
+          <div className="design-copy"><div className="design-eyebrow">Your wellness. Your journey.</div><h1 id="design-hero-title">Your journey to <em>feeling better</em> starts here.</h1><p>TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.</p><div className="design-actions"><Link href="/register" className="design-primary">Start Your Journey <ArrowRight size={18}/></Link><Link href="/wellness" className="design-secondary">Explore Wellness</Link></div></div>
+          <div className="design-slogan" aria-hidden="true">A healthier<br/><em>happier</em> you<span/></div>
+        </div>
+        <div className="design-feature-row"><Link href="/wellness" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>Personalized<br/><b>Wellness</b></span><ArrowRight size={16}/></Link><Link href="/wellness/confidence-without-comparison" className="design-feature"><span className="feature-icon"><Heart size={20}/></span><span>Body<br/><b>Confidence</b></span><ArrowRight size={16}/></Link><Link href="/ai" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>AI-Powered<br/><b>Guidance</b></span><ArrowRight size={16}/></Link></div>
+        <div className="design-scroll" aria-hidden="true"><span>⌄</span></div>
       </div>
     </section>
     <section className="section"><div className="shell"><div className="section-head"><div><div className="eyebrow">Support that meets you where you are</div><h2>Your wellbeing is more than a before-and-after.</h2></div><p>Choose what matters to you. Skip what doesn’t. Change your direction as life changes.</p></div><div className="cards">{categories.map((c,i)=><div className="card" key={c.title}><div className="icon" aria-hidden="true">{c.symbol}</div><div className="number">0{i+1}</div><h3>{c.title}</h3><p>{c.text}</p></div>)}</div></div></section>
