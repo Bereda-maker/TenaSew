@@ -10,7 +10,7 @@ export function Home(){
   const stop=(event:React.MouseEvent)=>event.stopPropagation();
   return <div className="landing-page">
     <section className="design-hero" aria-labelledby="design-hero-title">
-      <video className="design-hero-video" autoPlay loop muted playsInline poster="/tenasew-poster.svg" aria-hidden="true"><source src="/tenasew-hero.mp4" type="video/mp4"/></video>
+      <img className="design-hero-image" src="/tenasew-hero-image.jpg" alt="A woman taking a peaceful moment in a green mountain landscape" />
       <div className="design-hero-overlay" aria-hidden="true"/>
       <div className="design-hero-inner">
         <div className="design-hero-content">
