@@ -71,3 +71,7 @@ body:has(.design-hero) .global-nav-shell{background:rgba(250,246,236,.9)}
 @media(max-width:820px){.design-hero-image{object-position:62% center}.design-hero-content{padding-top:18vh}}
 @media(max-width:500px){.design-hero-image{object-position:64% center}.design-hero-overlay{background:linear-gradient(90deg,rgba(7,38,29,.9) 0%,rgba(7,38,29,.48) 72%),linear-gradient(0deg,rgba(5,25,21,.86) 0%,transparent 58%)}}
 @media(prefers-reduced-motion:reduce){.design-hero-image{object-position:center center}}
+/* Keep the scenic image fully visible while layering readable content above it. */
+.design-hero-image{z-index:0}
+.design-hero-overlay{z-index:1}
+.design-hero-inner{z-index:2}
