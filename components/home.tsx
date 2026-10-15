@@ -1,12 +1,19 @@
 'use client';
 import Link from 'next/link';
 import {useEffect, useState} from 'react';
+
+type Language = 'en' | 'am';
+const languageEvent = 'tenasew-language-change';
 import {ArrowRight, BookOpen, Heart, Menu, ShieldCheck, Sparkles, Users, X, Search} from 'lucide-react';
 import {categories, resources} from '../lib/data';
 
 export function Home(){
   const [menuOpen,setMenuOpen]=useState(false);
+  const [language,setLanguage]=useState<Language>('en');
   useEffect(()=>{const close=()=>setMenuOpen(false);const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')close()};document.addEventListener('keydown',onKey);document.addEventListener('click',close);return()=>{document.removeEventListener('keydown',onKey);document.removeEventListener('click',close)}},[]);
+  useEffect(()=>{const saved=window.localStorage.getItem('tenasew-language');if(saved==='am'||saved==='en')setLanguage(saved);const onLanguageChange=(event:Event)=>{const next=(event as CustomEvent<Language>).detail;if(next==='am'||next==='en')setLanguage(next)};window.addEventListener(languageEvent,onLanguageChange);return()=>window.removeEventListener(languageEvent,onLanguageChange)},[]);
+  const am=language==='am';
+  const hero=am?{eyebrow:'ጤናዎ። ጉዞዎ።',before:'ወደ',em:'የተሻለ ስሜት',after:'የሚወስድ ጉዞዎ እዚህ ይጀምራል።',body:'TenaSew ግላዊ የጤና መመሪያ፣ የሰውነት እምነት ምንጮች፣ ጤናማ ልምዶች እና AI የሚያግዝ ድጋፍን በአንድ ላይ ያመጣል።',start:'ጉዞዎን ይጀምሩ',explore:'ጤናን ያስሱ',sloganTop:'የበለጠ ጤናማ',sloganBottom:'የበለጠ ደስተኛ እርስዎ',features:['የግል ጤና','የሰውነት እምነት','AI መመሪያ']}:{eyebrow:'Your wellness. Your journey.',before:'Your journey to',em:'feeling better',after:'starts here.',body:'TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.',start:'Start Your Journey',explore:'Explore Wellness',sloganTop:'A healthier',sloganBottom:'happier you',features:['Personalized Wellness','Body Confidence','AI-Powered Guidance']};
   const stop=(event:React.MouseEvent)=>event.stopPropagation();
   return <div className="landing-page">
     <section className="design-hero" aria-labelledby="design-hero-title">
@@ -14,10 +21,10 @@ export function Home(){
       <div className="design-hero-overlay" aria-hidden="true"/>
       <div className="design-hero-inner">
         <div className="design-hero-content">
-          <div className="design-copy"><div className="design-eyebrow">Your wellness. Your journey.</div><h1 id="design-hero-title">Your journey to <em>feeling better</em> starts here.</h1><p>TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.</p><div className="design-actions"><Link href="/register" className="design-primary">Start Your Journey <ArrowRight size={18}/></Link><Link href="/wellness" className="design-secondary">Explore Wellness</Link></div></div>
-          <div className="design-slogan" aria-hidden="true">A healthier<br/><em>happier</em> you<span/></div>
+          <div className="design-copy"><div className="design-eyebrow">{hero.eyebrow}</div><h1 id="design-hero-title">{hero.before} <em>{hero.em}</em> {hero.after}</h1><p>{hero.body}</p><div className="design-actions"><Link href="/register" className="design-primary">{hero.start} <ArrowRight size={18}/></Link><Link href="/wellness" className="design-secondary">{hero.explore}</Link></div></div>
+          <div className="design-slogan" aria-label={`${hero.sloganTop} ${hero.sloganBottom}`}>{hero.sloganTop}<br/><em>{hero.sloganBottom}</em><span/></div>
         </div>
-        <div className="design-feature-row"><Link href="/wellness" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>Personalized<br/><b>Wellness</b></span><ArrowRight size={16}/></Link><Link href="/body-confidence" className="design-feature"><span className="feature-icon"><Heart size={20}/></span><span>Body<br/><b>Confidence</b></span><ArrowRight size={16}/></Link><Link href="/ai" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>AI-Powered<br/><b>Guidance</b></span><ArrowRight size={16}/></Link></div>
+        <div className="design-feature-row"><Link href="/wellness" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>{hero.features[0].split(' ')[0]}<br/><b>{hero.features[0].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link><Link href="/body-confidence" className="design-feature"><span className="feature-icon"><Heart size={20}/></span><span>{hero.features[1].split(' ')[0]}<br/><b>{hero.features[1].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link><Link href="/ai" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>{hero.features[2].split(' ')[0]}<br/><b>{hero.features[2].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link></div>
         <div className="design-scroll" aria-hidden="true"><span>⌄</span></div>
       </div>
     </section>
