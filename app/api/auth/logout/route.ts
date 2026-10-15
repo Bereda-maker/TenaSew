@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server';import {revokeSession} from '../../../../lib/auth';export async function POST(){try{await revokeSession();return NextResponse.json({ok:true});}catch{return NextResponse.json({error:'Unable to sign out.'},{status:503});}}

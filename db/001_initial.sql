@@ -8,4 +8,12 @@ create table if not exists user_habits (id uuid primary key default gen_random_u
 create table if not exists habit_completions (id uuid primary key default gen_random_uuid(), habit_id uuid not null references user_habits(id) on delete cascade, user_id uuid not null references profiles(id) on delete cascade, completion_date date not null, status text not null default 'complete', created_at timestamptz not null default now(), unique(habit_id, completion_date));
 create table if not exists user_feedback (id uuid primary key default gen_random_uuid(), user_id uuid references profiles(id) on delete set null, category text not null, message text not null, status text not null default 'open', created_at timestamptz not null default now());
 create table if not exists admin_audit_logs (id uuid primary key default gen_random_uuid(), actor_id uuid references profiles(id) on delete set null, action text not null, target_type text not null, target_id text, metadata jsonb not null default '{}', created_at timestamptz not null default now());
--- Enable RLS and add provider-specific policies as part of auth integration before production launch.
+
+-- Server-side account and session records. Passwords are stored as scrypt hashes, never plaintext.
+create table if not exists auth_users (id uuid primary key default gen_random_uuid(), email text not null unique, password_hash text not null, role text not null default 'user' check (role in ('user','content_editor','moderator','administrator')), status text not null default 'active' check (status in ('active','suspended','deleted')), created_at timestamptz not null default now(), updated_at timestamptz not null default now());
+create table if not exists sessions (token text primary key, user_id uuid not null references auth_users(id) on delete cascade, expires_at timestamptz not null, created_at timestamptz not null default now());
+create index if not exists sessions_user_idx on sessions(user_id);
+create index if not exists sessions_expiry_idx on sessions(expires_at);
+
+-- Remove expired sessions periodically through a scheduled cleanup job.
+-- Provider-specific RLS can be added if the database is later connected to a managed auth identity provider.

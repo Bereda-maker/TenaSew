@@ -1,13 +1,16 @@
 # TenaSew delivery outcomes
 
 - [x] Responsive public website with TenaSew brand, home, about, wellness, AI, professionals, auth, safety, contact, privacy, and terms routes.
-- [x] Wellness library with keyword search, category filtering, empty state, progressive-ready resource data, and resource detail pages.
-- [x] Supportive onboarding with multi-select interests and optional goal selection.
-- [x] Dashboard concept with habit completion, preference update path, and non-punitive progress language.
+- [x] Wellness library with keyword search, category filtering, empty state, resource data, and resource detail pages.
+- [x] Server-side PostgreSQL pool, health endpoint, normalized migration, ownership-checked preferences and habit APIs.
+- [x] Production registration, scrypt password hashing, HTTP-only session cookies, login, logout, and current-user endpoint.
+- [x] Supportive onboarding with multi-select interests and persisted goal preferences.
+- [x] Dashboard backed by persisted habit creation, completion, and ownership checks.
 - [x] AI assistant experience with suggested questions, clear AI disclosure, safe fallback, clear conversation control, and safety boundaries.
-- [x] Admin information architecture with editorial workflow, operational empty states, and server-side authorization notes.
+- [x] Server-side admin role gate for the admin route.
 - [x] SEO metadata, sitemap, robots, accessible labels, focus states, responsive layouts, and route manifest.
-- [x] Versioned PostgreSQL starter migration and deployment/architecture documentation.
-- [ ] Connect production authentication, provider-backed sessions, password recovery, account deletion, and data export.
-- [ ] Connect PostgreSQL provider, RLS policies, rate limits, audit persistence, editorial mutations, and professional verification workflow.
+- [x] Versioned PostgreSQL migration and deployment/architecture documentation.
+- [ ] Add verified email, secure password recovery, account deletion, data export, rate limiting, and session cleanup.
+- [ ] Add production AI route with provider abstraction, retrieval grounding, output validation, and safety feedback persistence.
+- [ ] Add editorial mutations, review trail UI, admin metrics from real queries, and professional verification workflow.
 - [ ] Complete legal, clinical, privacy, and safeguarding review before launch.
