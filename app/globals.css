@@ -240,3 +240,30 @@ body:has(.design-hero) .global-site-header{background:linear-gradient(180deg,rgb
   .design-feature{min-height:44px;padding:7px 5px;font-size:9px;line-height:1.12;border-radius:14px}
   .design-feature .feature-icon{width:24px;height:24px}
 }
+
+/* Simplified interior system: keep the hero/navbar, make the rest calmer and more editorial. */
+body{background:var(--cream);color:var(--ink)}
+.section{background:var(--cream);padding:clamp(58px,7vw,88px) 0}
+.section.alt{background:#f2f6ee}
+.page-hero,.inner-hero{background:#edf4ea;border-bottom:1px solid var(--line)}
+.page-hero:before,.page-hero:after,.inner-hero:before,.inner-hero:after{display:none}
+.page-hero h1,.inner-hero h1{letter-spacing:-.045em}
+.inner-hero{background:#173f35;color:#fff}
+.cards,.resource-grid{gap:16px}
+.card,.resource-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 6px 18px rgba(23,63,53,.045);transition:border-color .2s,box-shadow .2s}
+.card:hover,.resource-card:hover{transform:none;box-shadow:0 10px 24px rgba(23,63,53,.08);border-color:#c3d6c5}
+.card p,.resource-card p{line-height:1.62}
+.icon{background:#e6f1e5;box-shadow:none}
+.tag{background:#edf5e9;border:0}
+.input,.select,.textarea{background:#fff;box-shadow:none}
+.input:hover,.select:hover,.textarea:hover{box-shadow:none}
+.form-card{box-shadow:0 12px 32px rgba(23,63,53,.07);border-radius:18px}
+.form-card:before{display:none}
+.stat{box-shadow:0 6px 18px rgba(23,63,53,.045)}
+.stat:after{display:none}
+.habit:hover{padding-left:0;padding-right:0;background:transparent}
+.ai-preview{box-shadow:none;border:0;background:var(--forest)}
+.footer{background:var(--forest);padding-top:58px}
+.footer:before{display:none}
+.card,.resource-card,.form-card,.stat{animation:none}
+@media(max-width:520px){.section{padding:52px 0}.card,.resource-card{border-radius:16px}.page-hero,.inner-hero{padding-top:64px;padding-bottom:40px}}
