@@ -208,3 +208,35 @@ body:has(.design-hero) .global-site-header{background:linear-gradient(180deg,rgb
 @media(max-width:800px){.page-hero,.inner-hero{padding-top:72px;padding-bottom:44px}.inner-hero{padding-top:82px}.page-hero h1,.inner-hero h1{font-size:clamp(40px,11vw,62px)}.section-head{margin-bottom:28px}.resource-grid{gap:16px}.form-card{border-radius:20px}.stat-row{grid-template-columns:1fr 1fr}.footer{padding-top:56px}}
 @media(max-width:520px){.page-hero h1,.inner-hero h1{font-size:42px}.page-hero p,.inner-hero p{font-size:15px}.stat-row{grid-template-columns:1fr}.library-toolbar{display:grid;grid-template-columns:1fr}.library-toolbar>*{min-width:0;width:100%}.resource-card{min-height:0}.quote{font-size:21px;padding:24px}.footer-grid{gap:26px}}
 @media(prefers-reduced-motion:reduce){.card,.resource-card,.form-card,.stat{animation:none}.card:hover,.resource-card:hover{transform:none}.footer a:hover{transform:none}}
+
+/* Final mobile hero composition: clear hierarchy, no overlap, all key actions visible. */
+@media (max-width:820px){
+  .design-hero{min-height:100svh;min-height:100vh}
+  .design-hero-inner{min-height:100svh;min-height:100vh;padding:74px 0 78px}
+  .design-hero-content{padding:clamp(78px,12vh,150px) 3% 0;align-items:flex-start}
+  .design-copy{max-width:100%}
+  .design-copy h1{max-width:620px;font-size:clamp(2.65rem,10vw,4.35rem);line-height:.98;margin-bottom:18px}
+  .design-copy>p{max-width:590px;font-size:clamp(14px,2.35vw,17px);line-height:1.48}
+  .design-actions{margin-top:20px;gap:10px}
+  .design-primary,.design-secondary{padding:12px 16px;font-size:13px;min-height:44px}
+  .design-slogan{display:block;right:4%;bottom:24%;font-size:clamp(15px,2.4vw,20px);line-height:1.02;z-index:4}
+  .design-slogan span{width:58px;margin-top:7px;margin-left:14px}
+  .design-feature-row{display:flex;position:absolute;left:3%;right:3%;bottom:20px;padding:0;gap:7px;z-index:4}
+  .design-feature{flex:1;min-width:0;min-height:48px;padding:8px 7px;gap:6px;font-size:10px}
+  .design-feature .feature-icon{display:grid;width:27px;height:27px;flex:none}
+  .design-feature>svg{display:none}
+  .design-scroll{display:none}
+}
+@media (max-width:500px){
+  .design-hero{background-position:68% center}
+  .design-hero-inner{padding-top:68px;padding-bottom:76px}
+  .design-hero-content{padding-top:clamp(82px,12vh,138px)}
+  .design-copy h1{font-size:clamp(2.35rem,10.6vw,3.5rem);line-height:1;margin-bottom:16px}
+  .design-copy>p{font-size:14px;line-height:1.48;max-width:100%}
+  .design-actions{margin-top:18px;gap:8px}
+  .design-primary,.design-secondary{padding:11px 13px;font-size:12px}
+  .design-slogan{right:4%;bottom:23%;font-size:14px}
+  .design-feature-row{left:2.5%;right:2.5%;bottom:17px;gap:5px}
+  .design-feature{min-height:44px;padding:7px 5px;font-size:9px;line-height:1.12;border-radius:14px}
+  .design-feature .feature-icon{width:24px;height:24px}
+}
