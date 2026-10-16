@@ -1,37 +1,315 @@
 'use client';
 import Link from 'next/link';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {ArrowRight, ArrowUpRight, BookOpen, Clock, Droplets, Dumbbell, Heart, Plus, Send, ShieldCheck, Sparkles, Sprout, Users} from 'lucide-react';
+import {resources} from '../lib/data';
 
 type Language = 'en' | 'am';
 const languageEvent = 'tenasew-language-change';
-import {ArrowRight, BookOpen, Heart, Menu, ShieldCheck, Sparkles, Users, X, Search} from 'lucide-react';
-import {categories, resources} from '../lib/data';
 
-export function Home(){
-  const [menuOpen,setMenuOpen]=useState(false);
-  const [language,setLanguage]=useState<Language>('en');
-  useEffect(()=>{const close=()=>setMenuOpen(false);const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')close()};document.addEventListener('keydown',onKey);document.addEventListener('click',close);return()=>{document.removeEventListener('keydown',onKey);document.removeEventListener('click',close)}},[]);
-  useEffect(()=>{const saved=window.localStorage.getItem('tenasew-language');if(saved==='am'||saved==='en')setLanguage(saved);const onLanguageChange=(event:Event)=>{const next=(event as CustomEvent<Language>).detail;if(next==='am'||next==='en')setLanguage(next)};window.addEventListener(languageEvent,onLanguageChange);return()=>window.removeEventListener(languageEvent,onLanguageChange)},[]);
-  const am=language==='am';
-  const hero=am?{eyebrow:'ጤናዎ። ጉዞዎ።',before:'ወደ',em:'የተሻለ ስሜት',after:'የሚወስድ ጉዞዎ እዚህ ይጀምራል።',body:'TenaSew ግላዊ የጤና መመሪያ፣ የሰውነት እምነት ምንጮች፣ ጤናማ ልምዶች እና AI የሚያግዝ ድጋፍን በአንድ ላይ ያመጣል።',start:'ጉዞዎን ይጀምሩ',explore:'ጤናን ያስሱ',sloganTop:'የበለጠ ጤናማ',sloganBottom:'የበለጠ ደስተኛ እርስዎ',features:['የግል ጤና','የሰውነት እምነት','AI መመሪያ']}:{eyebrow:'Your wellness. Your journey.',before:'Your journey to',em:'feeling better',after:'starts here.',body:'TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.',start:'Start Your Journey',explore:'Explore Wellness',sloganTop:'A healthier',sloganBottom:'happier you',features:['Personalized Wellness','Body Confidence','AI-Powered Guidance']};
-  const stop=(event:React.MouseEvent)=>event.stopPropagation();
-  return <div className="landing-page">
+/* ---------- Copy (English + Amharic) ---------- */
+const copy = {
+  en: {
+    hero: {eyebrow: 'Your wellness. Your journey.', before: 'Your journey to', em: 'feeling better', after: 'starts here.', body: 'TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.', start: 'Start Your Journey', explore: 'Explore Wellness', sloganTop: 'A healthier', sloganBottom: 'happier you', features: ['Personalized Wellness', 'Body Confidence', 'AI-Powered Guidance']},
+    marquee: ['Body confidence', 'Healthy habits', 'Skin care', 'Hair care', 'Balanced meals', 'Gentle strength', 'Rest', 'Built with care in Ethiopia'],
+    support: {eyebrow: 'Support that meets you where you are', title: 'Your wellbeing is more than a before-and-after.', text: 'Choose what matters to you. Skip what doesn’t. Change your direction as life changes.', explore: 'Explore'},
+    tiles: [
+      {title: 'Body confidence', text: 'Build a kinder, more grounded relationship with your body.', href: '/body-confidence'},
+      {title: 'Healthy habits', text: 'Small routines for food, movement, rest, and everyday energy.', href: '/wellness'},
+      {title: 'Skin & hair care', text: 'Learn approachable care basics for every texture and tone.', href: '/wellness'},
+      {title: 'Strength & movement', text: 'Explore safe ways to feel stronger, wherever you are.', href: '/wellness'},
+    ],
+    how: {eyebrow: 'How TenaSew works', title: 'Small steps. Real context. No shame.', lead: 'We turn good intentions into doable next steps, while keeping the bigger picture in view: confidence isn’t conditional on appearance.',
+      steps: [
+        {t: 'Tell us what support looks like', p: 'Pick interests and goals at your pace. You can always change them later.'},
+        {t: 'Find useful, grounded guidance', p: 'Browse clear resources designed for real homes, budgets, bodies, and routines.'},
+        {t: 'Build a rhythm that belongs to you', p: 'Track habits without punitive streaks, pressure, or perfection.'},
+      ],
+      quote: '“You don’t have to become someone else to deserve confidence.”', by: '— The TenaSew promise'},
+    focus: {eyebrow: 'Try it now', title: 'What would feel supportive today?', text: 'Pick one thing. We’ll point you to a good place to start — no sign-up needed.', read: 'Read this guide', ask: 'Ask TenaSew AI', items: ['Feeling more confident', 'Eating well', 'Getting stronger', 'Caring for my skin', 'Caring for my hair', 'Resting without guilt']},
+    ai: {eyebrow: 'Meet TenaSew AI', title: 'A thoughtful starting point for your questions.', text: 'Ask about everyday wellness, find a resource, or turn a goal into a simple next step. TenaSew AI is transparent about its limits and never diagnoses.', cta: 'Explore the assistant', name: 'TenaSew AI', sub: 'Educational support · not medical advice', q: 'How can I build a skincare routine without making it complicated?', a: 'Let’s start with the basics: a gentle cleanse, moisturiser if your skin needs it, and sun protection when available. Add one new product at a time so you can notice how your skin responds.', placeholder: 'Ask anything about everyday wellness…', pills: ['Honest about limits', 'Never diagnoses', 'Never rates your looks']},
+    lib: {eyebrow: 'Start with something useful', title: 'Guidance for real life.', browse: 'Browse the library', read: 'Read'},
+    trust: {eyebrow: 'Our approach', title: 'Careful with your trust.', lead: 'TenaSew is not here to sell your insecurities back to you. We focus on education, agency, and practical tools—and make it clear when professional care is the better next step.', cta: 'Read our safety promise',
+      pillars: [{t: 'Evidence-aware', p: 'Clear sources and honest limits.'}, {t: 'Body-kind', p: 'No scores, shame, or transformations.'}, {t: 'Inclusive', p: 'Designed for varied bodies and lives.'}, {t: 'Useful', p: 'Simple guidance you can act on.'}]},
+    faq: {eyebrow: 'Good to know', title: 'Honest answers.', items: [
+      {q: 'Does TenaSew give medical advice?', a: 'No. TenaSew is educational support. It doesn’t diagnose or prescribe, and it tells you plainly when talking to a professional is the better next step.'},
+      {q: 'Who is TenaSew for?', a: 'Anyone who wants to look after their wellbeing and build a kinder relationship with their body — at their own pace, with practical, budget-aware guidance.'},
+      {q: 'Can I use it in Amharic?', a: 'The menu and this home page are available in English and አማርኛ. Switch any time with the EN / አማ toggle at the top.'},
+    ]},
+    cta: {title: 'Take one small step today.', text: 'No pressure, no perfection — just a gentle place to begin.', primary: 'Start Your Journey', secondary: 'Browse the library'},
+  },
+  am: {
+    hero: {eyebrow: 'ጤናዎ። ጉዞዎ።', before: 'ወደ', em: 'የተሻለ ስሜት', after: 'የሚወስድ ጉዞዎ እዚህ ይጀምራል።', body: 'TenaSew ግላዊ የጤና መመሪያ፣ የሰውነት እምነት ምንጮች፣ ጤናማ ልምዶች እና AI የሚያግዝ ድጋፍን በአንድ ላይ ያመጣል።', start: 'ጉዞዎን ይጀምሩ', explore: 'ጤናን ያስሱ', sloganTop: 'የበለጠ ጤናማ', sloganBottom: 'የበለጠ ደስተኛ እርስዎ', features: ['የግል ጤና', 'የሰውነት እምነት', 'AI መመሪያ']},
+    marquee: ['የሰውነት እምነት', 'ጤናማ ልምዶች', 'የቆዳ እንክብካቤ', 'የፀጉር እንክብካቤ', 'ሚዛናዊ ምግብ', 'ቀስ በቀስ ጥንካሬ', 'እረፍት', 'በኢትዮጵያ በፍቅር የተሠራ'],
+    support: {eyebrow: 'ባሉበት የሚገናኝ ድጋፍ', title: 'ደህንነትዎ ከ“በፊት እና በኋላ” የላቀ ነው።', text: 'ለእርስዎ ጠቃሚ የሆነውን ይምረጡ። ያልሆነውን ይዝለሉ። ሕይወት ሲቀየር አቅጣጫዎን ይቀይሩ።', explore: 'ያስሱ'},
+    tiles: [
+      {title: 'የሰውነት እምነት', text: 'ከሰውነትዎ ጋር ይበልጥ ቸር እና የተረጋጋ ግንኙነት ይገንቡ።', href: '/body-confidence'},
+      {title: 'ጤናማ ልምዶች', text: 'ለምግብ፣ ለእንቅስቃሴ፣ ለእረፍት እና ለዕለት ጉልበት ትናንሽ ልማዶች።', href: '/wellness'},
+      {title: 'የቆዳ እና ፀጉር እንክብካቤ', text: 'ለእያንዳንዱ የፀጉር ዓይነት እና የቆዳ ቀለም የሚሆን ቀላል መሠረታዊ እንክብካቤ ይማሩ።', href: '/wellness'},
+      {title: 'ጥንካሬ እና እንቅስቃሴ', text: 'የትም ቢሆኑ ጠንካራ ለመሆን ደህንነቱ የተጠበቀ መንገዶችን ይመርምሩ።', href: '/wellness'},
+    ],
+    how: {eyebrow: 'TenaSew እንዴት ይሰራል', title: 'ትናንሽ እርምጃዎች። እውነተኛ ዐውድ። ያለ እፍረት።', lead: 'መልካም ሐሳቦችን ሊደረጉ ወደሚችሉ ቀጣይ እርምጃዎች እንለውጣለን፤ ትልቁን ስዕል ግን አንዘነጋም፦ እምነት በመልክ ላይ የተመሠረተ አይደለም።',
+      steps: [
+        {t: 'ድጋፍ ለእርስዎ ምን እንደሆነ ይንገሩን', p: 'ፍላጎቶችዎን እና ግቦችዎን በራስዎ ፍጥነት ይምረጡ። በኋላ መቀየር ይችላሉ።'},
+        {t: 'ጠቃሚ እና ጠንካራ መመሪያ ያግኙ', p: 'ለእውነተኛ ቤቶች፣ በጀቶች፣ አካላት እና የዕለት ተዕለት ልማዶች የተዘጋጁ ግልጽ ምንጮችን ያስሱ።'},
+        {t: 'የራስዎ የሆነ ሪትም ይገንቡ', p: 'ልማዶችን ያለ ቅጣት፣ ጫና ወይም ፍጹምነት ይከታተሉ።'},
+      ],
+      quote: '“መተማመን ለማግኘት ሌላ ሰው መሆን አይጠበቅብዎትም።”', by: '— የTenaSew ቃል ኪዳን'},
+    focus: {eyebrow: 'አሁኑኑ ይሞክሩ', title: 'ዛሬ ምን ይጠቅምዎታል?', text: 'አንድ ነገር ይምረጡ። ለመጀመር ጥሩ ቦታ እናመላክትዎታለን — መመዝገብ አያስፈልግም።', read: 'መመሪያውን ያንብቡ', ask: 'TenaSew AIን ይጠይቁ', items: ['የበለጠ መተማመን', 'በሚገባ መመገብ', 'ጠንካራ መሆን', 'ቆዳዬን መንከባከብ', 'ፀጉሬን መንከባከብ', 'ያለ ጸጸት ማረፍ']},
+    ai: {eyebrow: 'TenaSew AIን ይተዋወቁ', title: 'ለጥያቄዎችዎ አሳቢ መነሻ።', text: 'ስለ ዕለታዊ ጤና ይጠይቁ፣ ምንጭ ያግኙ ወይም ግብን ወደ ቀላል ቀጣይ እርምጃ ይለውጡ። TenaSew AI ገደቦቹን በግልጽ ይናገራል፤ በጭራሽ አይመረምርም።', cta: 'ረዳቱን ያስሱ', name: 'TenaSew AI', sub: 'ትምህርታዊ ድጋፍ · የሕክምና ምክር አይደለም', q: 'ውስብስብ ሳላደርግ የቆዳ እንክብካቤ ልማድ እንዴት መገንባት እችላለሁ?', a: 'በመሠረታዊ ነገሮች እንጀምር፦ ለስላሳ ማጽጃ፣ ቆዳዎ ከፈለገ እርጥበት፣ እና ሲቻል የፀሐይ መከላከያ። ቆዳዎ እንዴት እንደሚሰማ ለመከታተል በአንድ ጊዜ አንድ አዲስ ምርት ብቻ ይጨምሩ።', placeholder: 'ስለ ዕለታዊ ጤና ማንኛውንም ይጠይቁ…', pills: ['ስለ ገደቦቹ ሐቀኛ', 'በጭራሽ አይመረምርም', 'መልክዎን አይገመግምም']},
+    lib: {eyebrow: 'በጠቃሚ ነገር ይጀምሩ', title: 'ለእውነተኛ ሕይወት መመሪያ።', browse: 'ቤተ-መጽሐፍቱን ያስሱ', read: 'ያንብቡ'},
+    trust: {eyebrow: 'አካሄዳችን', title: 'በእምነትዎ ላይ ጥንቃቄ እናደርጋለን።', lead: 'TenaSew ስጋቶችዎን መልሶ ለመሸጥ አይደለም። በትምህርት፣ በራስ የመወሰን አቅም እና በተግባራዊ መሣሪያዎች ላይ እናተኩራለን — የባለሙያ እንክብካቤ የተሻለ ቀጣይ እርምጃ ሲሆንም በግልጽ እንናገራለን።', cta: 'የደህንነት ቃል ኪዳናችንን ያንብቡ',
+      pillars: [{t: 'በማስረጃ የተደገፈ', p: 'ግልጽ ምንጮች እና ሐቀኛ ገደቦች።'}, {t: 'ለሰውነት ቸር', p: 'ነጥብ፣ እፍረት ወይም “ለውጥ” የለም።'}, {t: 'ሁሉንም ያካተተ', p: 'ለተለያዩ አካላት እና ሕይወቶች የተዘጋጀ።'}, {t: 'ጠቃሚ', p: 'ሊተገብሩት የሚችሉ ቀላል መመሪያዎች።'}]},
+    faq: {eyebrow: 'ማወቅ ጥሩ ነው', title: 'ሐቀኛ መልሶች።', items: [
+      {q: 'TenaSew የሕክምና ምክር ይሰጣል?', a: 'አይሰጥም። TenaSew ትምህርታዊ ድጋፍ ነው። አይመረምርም፣ መድኃኒት አያዝም፤ ባለሙያ ማነጋገር የተሻለ ሲሆን በግልጽ ይነግርዎታል።'},
+      {q: 'TenaSew ለማን ነው?', a: 'ደህንነታቸውን ለመንከባከብ እና ከሰውነታቸው ጋር ቸር ግንኙነት ለመገንባት ለሚፈልጉ ሁሉ — በራሳቸው ፍጥነት፣ በተግባራዊ እና ለበጀት ተስማሚ መመሪያ።'},
+      {q: 'በአማርኛ መጠቀም እችላለሁ?', a: 'ምናሌው እና ይህ መነሻ ገጽ በእንግሊዝኛ እና በአማርኛ ይገኛሉ። ከላይ ባለው EN / አማ ቁልፍ በማንኛውም ጊዜ ይቀያይሩ።'},
+    ]},
+    cta: {title: 'ዛሬ አንድ ትንሽ እርምጃ ይውሰዱ።', text: 'ያለ ጫና፣ ያለ ፍጹምነት — ለመጀመር ቀላል ቦታ ብቻ።', primary: 'ጉዞዎን ይጀምሩ', secondary: 'ቤተ-መጽሐፍቱን ያስሱ'},
+  },
+} as const;
+
+const tileMeta = [
+  {tone: 'forest', Icon: Heart},
+  {tone: 'mint', Icon: Sprout},
+  {tone: 'sand', Icon: Droplets},
+  {tone: 'clay', Icon: Dumbbell},
+] as const;
+
+const focusSlugs = ['confidence-without-comparison', 'local-foods-balanced-plate', 'beginner-strength', 'simple-skin-routine', 'care-for-natural-hair', 'rest-is-a-practice'];
+const toneOf: Record<string, string> = {'Body confidence': 'clay', 'Nutrition': 'sand', 'Movement': 'mint', 'Skin care': 'mint', 'Hair care': 'clay', 'General wellness': 'sand'};
+
+/* Adds .in to every .reveal element as it scrolls into view. */
+function useReveal(dep: unknown) {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal:not(.in)'));
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    document.documentElement.classList.add('js-reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [dep]);
+}
+
+export function Home() {
+  const [language, setLanguage] = useState<Language>('en');
+  const [focus, setFocus] = useState(0);
+  const root = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem('tenasew-language');
+    if (saved === 'am' || saved === 'en') setLanguage(saved);
+    const onChange = (event: Event) => {
+      const next = (event as CustomEvent<Language>).detail;
+      if (next === 'am' || next === 'en') setLanguage(next);
+    };
+    window.addEventListener(languageEvent, onChange);
+    return () => window.removeEventListener(languageEvent, onChange);
+  }, []);
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
+
+  useReveal(language);
+
+  const t = copy[language];
+  const hero = t.hero;
+  const picked = resources.find(r => r.slug === focusSlugs[focus]) ?? resources[0];
+
+  return <div className="landing-page" ref={root}>
+    {/* ---------- Hero (kept, now with a soft entrance) ---------- */}
     <section className="design-hero" aria-labelledby="design-hero-title">
       <img className="design-hero-image" src="/tenasew-hero-image.jpg" alt="A woman taking a peaceful moment in a green mountain landscape" />
       <div className="design-hero-overlay" aria-hidden="true"/>
       <div className="design-hero-inner">
         <div className="design-hero-content">
-          <div className="design-copy"><div className="design-eyebrow">{hero.eyebrow}</div><h1 id="design-hero-title">{hero.before} <em>{hero.em}</em> {hero.after}</h1><p>{hero.body}</p><div className="design-actions"><Link href="/register" className="design-primary">{hero.start} <ArrowRight size={18}/></Link><Link href="/wellness" className="design-secondary">{hero.explore}</Link></div></div>
+          <div className="design-copy">
+            <div className="design-eyebrow">{hero.eyebrow}</div>
+            <h1 id="design-hero-title">{hero.before} <em>{hero.em}</em> {hero.after}</h1>
+            <p>{hero.body}</p>
+            <div className="design-actions">
+              <Link href="/register" className="design-primary">{hero.start} <ArrowRight size={18}/></Link>
+              <Link href="/wellness" className="design-secondary">{hero.explore}</Link>
+            </div>
+          </div>
           <div className="design-slogan" aria-label={`${hero.sloganTop} ${hero.sloganBottom}`}>{hero.sloganTop}<br/><em>{hero.sloganBottom}</em><span/></div>
         </div>
-        <div className="design-feature-row"><Link href="/wellness" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>{hero.features[0].split(' ')[0]}<br/><b>{hero.features[0].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link><Link href="/body-confidence" className="design-feature"><span className="feature-icon"><Heart size={20}/></span><span>{hero.features[1].split(' ')[0]}<br/><b>{hero.features[1].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link><Link href="/ai" className="design-feature"><span className="feature-icon"><Sparkles size={20}/></span><span>{hero.features[2].split(' ')[0]}<br/><b>{hero.features[2].split(' ').slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link></div>
+        <div className="design-feature-row">
+          {[{href: '/wellness', Icon: Sparkles}, {href: '/body-confidence', Icon: Heart}, {href: '/ai', Icon: Sparkles}].map((f, i) => {
+            const words = hero.features[i].split(' ');
+            return <Link key={f.href + i} href={f.href} className="design-feature"><span className="feature-icon"><f.Icon size={20}/></span><span>{words[0]}<br/><b>{words.slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link>;
+          })}
+        </div>
         <div className="design-scroll" aria-hidden="true"><span>⌄</span></div>
       </div>
     </section>
-    <section className="section"><div className="shell"><div className="section-head"><div><div className="eyebrow">Support that meets you where you are</div><h2>Your wellbeing is more than a before-and-after.</h2></div><p>Choose what matters to you. Skip what doesn’t. Change your direction as life changes.</p></div><div className="cards">{categories.map((c,i)=><div className="card" key={c.title}><div className="icon" aria-hidden="true">{c.symbol}</div><div className="number">0{i+1}</div><h3>{c.title}</h3><p>{c.text}</p></div>)}</div></div></section>
-    <section className="section alt"><div className="shell split"><div><div className="eyebrow">How TenaSew works</div><h2>Small steps. Real context. No shame.</h2><p className="lead">We turn good intentions into doable next steps, while keeping the bigger picture in view: confidence isn’t conditional on appearance.</p><div className="steps"><div className="step"><span className="step-no">1</span><div><b>Tell us what support looks like</b><p>Pick interests and goals at your pace. You can always change them later.</p></div></div><div className="step"><span className="step-no">2</span><div><b>Find useful, grounded guidance</b><p>Browse clear resources designed for real homes, budgets, bodies, and routines.</p></div></div><div className="step"><span className="step-no">3</span><div><b>Build a rhythm that belongs to you</b><p>Track habits without punitive streaks, pressure, or perfection.</p></div></div></div></div><div className="quote">“You don’t have to become someone else to deserve confidence.”<div style={{fontFamily:'Inter,sans-serif',fontSize:13,color:'#66766e',marginTop:18}}>— The TenaSew promise</div></div></div></section>
-    <section className="section"><div className="shell"><div className="ai-preview"><div className="eyebrow" style={{color:'#d8a338'}}>Meet TenaSew AI</div><h2>A thoughtful starting point for your questions.</h2><p>Ask about everyday wellness, find a resource, or turn a goal into a simple next step. TenaSew AI is transparent about its limits and never diagnoses.</p><div className="bubble">How can I build a skincare routine without making it complicated?</div><div className="bubble user">Let’s start with the basics.</div><Link href="/ai" className="button gold">Explore the assistant <ArrowRight size={16} style={{verticalAlign:'middle'}}/></Link></div></div></section>
-    <section className="section alt"><div className="shell"><div className="section-head"><div><div className="eyebrow">Start with something useful</div><h2>Guidance for real life.</h2></div><Link href="/wellness" className="button secondary">Browse the library</Link></div><div className="cards">{resources.slice(0,3).map(r=><div className="card" key={r.slug}><span className="tag">{r.category}</span><h3>{r.title}</h3><p>{r.summary}</p><p style={{fontSize:12,marginTop:18}}>{r.time} · {r.level}</p></div>)}</div></div></section>
-    <section className="section"><div className="shell split"><div><div className="eyebrow">Our approach</div><h2>Careful with your trust.</h2><p className="lead">TenaSew is not here to sell your insecurities back to you. We focus on education, agency, and practical tools—and make it clear when professional care is the better next step.</p><Link href="/safety" className="button secondary">Read our safety promise</Link></div><div className="cards" style={{gridTemplateColumns:'1fr 1fr'}}><div className="card"><ShieldCheck className="icon"/><h3 style={{fontSize:20}}>Evidence-aware</h3><p>Clear sources and honest limits.</p></div><div className="card"><Heart className="icon"/><h3 style={{fontSize:20}}>Body-kind</h3><p>No scores, shame, or transformations.</p></div><div className="card"><Users className="icon"/><h3 style={{fontSize:20}}>Inclusive</h3><p>Designed for varied bodies and lives.</p></div><div className="card"><BookOpen className="icon"/><h3 style={{fontSize:20}}>Useful</h3><p>Simple guidance you can act on.</p></div></div></div></section>
-  </div>
+
+    {/* ---------- Marquee ---------- */}
+    <div className="ts-marquee" aria-label={t.marquee.join(', ')}>
+      <div className="ts-marquee-track" aria-hidden="true">
+        {[...t.marquee, ...t.marquee].map((item, i) => <span key={i}><i/>{item}</span>)}
+      </div>
+    </div>
+
+    {/* ---------- Support bento ---------- */}
+    <section className="ts-section">
+      <div className="shell">
+        <div className="ts-head reveal">
+          <div><div className="eyebrow">{t.support.eyebrow}</div><h2>{t.support.title}</h2></div>
+          <p>{t.support.text}</p>
+        </div>
+        <div className="ts-bento">
+          {t.tiles.map((tile, i) => {
+            const {tone, Icon} = tileMeta[i];
+            return <Link key={i} href={tile.href} className={`ts-tile tone-${tone} reveal`} style={{transitionDelay: `${i * 70}ms`}}>
+              <span className="ts-tile-no" aria-hidden="true">0{i + 1}</span>
+              <span className="ts-tile-icon"><Icon size={26} strokeWidth={1.8}/></span>
+              <div><h3>{tile.title}</h3><p>{tile.text}</p></div>
+              <span className="ts-tile-link">{t.support.explore} <ArrowUpRight size={17}/></span>
+            </Link>;
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- How it works ---------- */}
+    <section className="ts-section ts-alt">
+      <div className="shell">
+        <div className="ts-head reveal">
+          <div><div className="eyebrow">{t.how.eyebrow}</div><h2>{t.how.title}</h2></div>
+          <p>{t.how.lead}</p>
+        </div>
+        <ol className="ts-steps">
+          {t.how.steps.map((s, i) => <li key={i} className="ts-step reveal" style={{transitionDelay: `${i * 90}ms`}}>
+            <span className="ts-step-no">{i + 1}</span>
+            <h3>{s.t}</h3><p>{s.p}</p>
+          </li>)}
+        </ol>
+        <figure className="ts-quote ts-pattern reveal">
+          <span className="ts-quote-mark" aria-hidden="true">“</span>
+          <blockquote>{t.how.quote}</blockquote>
+          <figcaption>{t.how.by}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    {/* ---------- Interactive focus picker ---------- */}
+    <section className="ts-section">
+      <div className="shell">
+        <div className="ts-focus reveal">
+          <div className="ts-focus-left">
+            <div className="eyebrow">{t.focus.eyebrow}</div>
+            <h2>{t.focus.title}</h2>
+            <p>{t.focus.text}</p>
+            <div className="ts-chips" role="group" aria-label={t.focus.title}>
+              {t.focus.items.map((label, i) => <button key={i} type="button" className={`ts-chip${i === focus ? ' on' : ''}`} aria-pressed={i === focus} onClick={() => setFocus(i)}>{label}</button>)}
+            </div>
+          </div>
+          <div className={`ts-focus-card tone-${toneOf[picked.category] ?? 'mint'}`} aria-live="polite" key={picked.slug}>
+            <span className="tag">{picked.category}</span>
+            <h3>{picked.title}</h3>
+            <p>{picked.summary}</p>
+            <span className="ts-meta"><Clock size={14}/> {picked.time} · {picked.level}</span>
+            <div className="ts-focus-actions">
+              <Link href={`/wellness/${picked.slug}`} className="button">{t.focus.read} <ArrowRight size={16} style={{verticalAlign: 'middle'}}/></Link>
+              <Link href="/ai" className="button secondary">{t.focus.ask}</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- AI preview ---------- */}
+    <section className="ts-section ts-tight">
+      <div className="shell">
+        <div className="ts-ai ts-pattern reveal">
+          <div className="ts-ai-copy">
+            <div className="eyebrow" style={{color: '#f0c75e'}}>{t.ai.eyebrow}</div>
+            <h2>{t.ai.title}</h2>
+            <p>{t.ai.text}</p>
+            <ul className="ts-pills">{t.ai.pills.map((p, i) => <li key={i}><ShieldCheck size={14}/> {p}</li>)}</ul>
+            <Link href="/ai" className="button gold">{t.ai.cta} <ArrowRight size={16} style={{verticalAlign: 'middle'}}/></Link>
+          </div>
+          <div className="ts-chat" aria-hidden="false">
+            <div className="ts-chat-head"><span className="ts-avatar"><Sparkles size={16}/></span><div><b>{t.ai.name}</b><small>{t.ai.sub}</small></div></div>
+            <div className="ts-chat-body">
+              <div className="ts-msg user">{t.ai.q}</div>
+              <div className="ts-msg bot typing" aria-hidden="true"><i/><i/><i/></div>
+              <div className="ts-msg bot answer">{t.ai.a}</div>
+            </div>
+            <Link href="/ai" className="ts-chat-input"><span>{t.ai.placeholder}</span><span className="ts-send"><Send size={15}/></span></Link>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- Library ---------- */}
+    <section className="ts-section ts-alt">
+      <div className="shell">
+        <div className="ts-head reveal">
+          <div><div className="eyebrow">{t.lib.eyebrow}</div><h2>{t.lib.title}</h2></div>
+          <Link href="/wellness" className="button secondary">{t.lib.browse}</Link>
+        </div>
+        <div className="ts-lib">
+          {resources.map((r, i) => <Link key={r.slug} href={`/wellness/${r.slug}`} className={`ts-rcard tone-${toneOf[r.category] ?? 'mint'} reveal`} style={{transitionDelay: `${(i % 3) * 70}ms`}}>
+            <span className="tag">{r.category}</span>
+            <h3>{r.title}</h3>
+            <p>{r.summary}</p>
+            <span className="ts-rcard-foot"><span className="ts-meta"><Clock size={13}/> {r.time} · {r.level}</span><span className="ts-go">{t.lib.read} <ArrowRight size={15}/></span></span>
+          </Link>)}
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- Trust ---------- */}
+    <section className="ts-section">
+      <div className="shell ts-trust">
+        <div className="reveal">
+          <div className="eyebrow">{t.trust.eyebrow}</div>
+          <h2>{t.trust.title}</h2>
+          <p className="lead">{t.trust.lead}</p>
+          <Link href="/safety" className="button secondary">{t.trust.cta}</Link>
+        </div>
+        <div className="ts-pillars">
+          {t.trust.pillars.map((p, i) => {
+            const Icon = [ShieldCheck, Heart, Users, BookOpen][i];
+            return <div key={i} className="ts-pillar reveal" style={{transitionDelay: `${i * 70}ms`}}><span><Icon size={22} strokeWidth={1.8}/></span><h3>{p.t}</h3><p>{p.p}</p></div>;
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- FAQ ---------- */}
+    <section className="ts-section ts-alt">
+      <div className="shell ts-faq-wrap">
+        <div className="reveal"><div className="eyebrow">{t.faq.eyebrow}</div><h2>{t.faq.title}</h2></div>
+        <div className="ts-faq reveal">
+          {t.faq.items.map((item, i) => <details key={i}><summary><span>{item.q}</span><Plus size={20} className="ts-faq-icon"/></summary><p>{item.a}</p></details>)}
+        </div>
+      </div>
+    </section>
+
+    {/* ---------- Closing CTA ---------- */}
+    <section className="ts-section ts-cta-section">
+      <div className="shell">
+        <div className="ts-cta reveal">
+          <img src="/tenasew-hero-image.jpg" alt="" loading="lazy"/>
+          <div className="ts-cta-shade" aria-hidden="true"/>
+          <div className="ts-cta-inner">
+            <h2>{t.cta.title}</h2>
+            <p>{t.cta.text}</p>
+            <div className="ts-cta-actions">
+              <Link href="/register" className="design-primary">{t.cta.primary} <ArrowRight size={18}/></Link>
+              <Link href="/wellness" className="design-secondary">{t.cta.secondary}</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>;
 }
