@@ -21,36 +21,52 @@ const categories: Array<{
   {
     id: 'confidence', Icon: Heart, art: 'confidence', image: '/confi.png', href: '/wellness?category=Body%20confidence',
     label: {en: 'Body confidence', am: 'በራስ መተማመን'},
-    title: {en: 'Progress is more than what you see in the mirror.', am: 'እድገት በመስታወት ከሚታየው በላይ ነው።'},
-    description: {en: 'Build a kinder relationship with your body, without making appearance the goal.', am: 'ገጽታን ግብ ሳያደርጉ ከሰውነትዎ ጋር የበለጠ ደግ ግንኙነት ይገንቡ።'},
-    note: {en: 'Explore thoughtful guidance in the library.', am: 'በቤተ-መጽሐፍቱ ውስጥ ጠቃሚ መመሪያዎችን ያስሱ።'},
+    title: {en: 'Progress is more than what you see in the mirror.', am: 'እድገት በመስታወት ከሚታየው በላይ ነው፡'},
+    description: {en: 'Build a kinder relationship with your body, without making appearance the goal.', am: 'የውጭ ገጽታን ብቻ ግብ ሳያደርጉ ከራስዎ አካል ጋር አዎንታዊና ሰላማዊ ግንኙነት ይፍጠሩ።'},
+    note: {en: 'Explore thoughtful guidance in the library.', am: 'በቤተ-መጽሐፉ ውስጥ ያሉ አጋዥ መመሪያዎችን ያስሱ።'},
   },
   {
     id: 'habits', Icon: Leaf, art: 'habits', image: '/progress-habits.webp', href: '/wellness?category=Healthy%20habits',
     label: {en: 'Healthy habits', am: 'ጤናማ ልምዶች'},
-    title: {en: 'Small habits. Real-life progress.', am: 'ትንንሽ ልምዶች። እውነተኛ እድገት።'},
-    description: {en: 'Find simple ideas for nourishing meals, rest, and routines that fit real life.', am: 'ለተመጣጠነ ምግብ፣ ለእረፍትና ከእውነተኛ ሕይወት ጋር ለሚስማሙ ልምዶች ቀላል ሐሳቦችን ያግኙ።'},
-    note: {en: 'No routine guarantees a particular result.', am: 'ማንኛውም ልምድ የተለየ ውጤት አያረጋግጥም።'},
+    title: {en: 'Small habits. Real-life progress.', am: 'ትንንሽ ልምዶች፤ ዘላቂ እድገት።'},
+    description: {en: 'Find simple ideas for nourishing meals, rest, and routines that fit real life.', am: 'ከዕለታዊ ህይወትዎ ጋር የሚስማሙ ለተመጣጠነ ምግብ፣ ለእረፍትና ለበጎ ልምዶች የሚሆኑ ቀላል ሀሳቦችን ያግኙ።'},
+    note: {en: 'No routine guarantees a particular result.', am: 'ማንኛውም ልምድ ለሁሉም እኩል ውጤት እንደሚሰጥ ዋስትና አይሰጥም።'},
   },
   {
     id: 'care', Icon: Waves, art: 'care', image: '/progress-care.webp', href: '/wellness?category=Skin%20%26%20hair%20care',
     label: {en: 'Skin & hair care', am: 'የቆዳና ፀጉር እንክብካቤ'},
     title: {en: 'Your care routine, your own pace.', am: 'የእንክብካቤ ልምድዎ በራስዎ ፍጥነት።'},
-    description: {en: 'Start with approachable skin and natural-hair care guidance made for everyday life.', am: 'ለዕለት ተዕለት ሕይወት የሚስማሙ ቀላል የቆዳና የተፈጥሮ ፀጉር እንክብካቤ መመሪያዎችን ይጀምሩ።'},
-    note: {en: 'Care guidance, never cure promises.', am: 'የእንክብካቤ መመሪያ፤ የፈውስ ቃል ኪዳን አይደለም።'},
+    description: {en: 'Start with approachable skin and natural-hair care guidance made for everyday life.', am: 'ለዕለታዊ ህይወት የሚሆኑ ቀላል የቆዳና የተፈጥሮ ፀጉር እንክብካቤ መመሪያዎችን ይጀምሩ።'},
+    note: {en: 'Care guidance, never cure promises.', am: 'የእንክብካቤ መመሪያ እንጂ የፈውስ ቃል ኪዳን አይደለም።'},
   },
   {
     id: 'movement', Icon: Sparkles, art: 'movement', image: '/progress-movement.webp', href: '/wellness?category=Strength%20%26%20movement',
     label: {en: 'Strength & movement', am: 'ጉልበትና እንቅስቃሴ'},
-    title: {en: 'Celebrate what your body can do.', am: 'ሰውነትዎ የሚያደርገውን ያክብሩ።'},
-    description: {en: 'Explore gentle ways to build strength, mobility, and movement you enjoy.', am: 'ጉልበትንና ተንቀሳቃሽነትን ለማዳበር የሚያስደስቱ ቀላል መንገዶችን ያስሱ።'},
-    note: {en: 'There is no single way to move.', am: 'ለመንቀሳቀስ አንድ ብቻ መንገድ የለም።'},
+    title: {en: 'Celebrate what your body can do.', am: 'ሰውነትዎ ማድረግ የሚችለውን ያክብሩ።'},
+    description: {en: 'Explore gentle ways to build strength, mobility, and movement you enjoy.', am: 'አካልን ለማጠናከርና ቅልጥፍናን ለማዳበር የሚረዱ ደስ የሚሉ ቀላል እንቅስቃሴዎችን ያስሱ።'},
+    note: {en: 'There is no single way to move.', am: 'አካልን ለማንቀሳቀስ አንድ ወጥ የሆነ መንገድ የለም።'},
   },
 ];
 
 const words = {
-  en: {eyebrow: 'Your pace. Your kind of progress.', heading: 'A little progress can mean a lot.', intro: 'A steadier morning. Feeling more at home in your body. Moving in a way you enjoy. Find practical ideas for the progress that matters to you—with no pressure, comparison, or quick-fix promises.', all: 'All topics', disclaimer: 'Campaign visuals are illustrative models, not TenaSew members. Each card opens related, reviewed guidance in the wellness library.', explore: 'Explore your next small step', read: 'Explore in the library'},
-  am: {eyebrow: 'በራስዎ ፍጥነት። በራስዎ መንገድ።', heading: 'ትንሽ እድገት ትልቅ ትርጉም ሊኖረው ይችላል።', intro: 'የተረጋጋ ጠዋት። ከሰውነትዎ ጋር የበለጠ መስማማት። በሚያስደስትዎ መንገድ መንቀሳቀስ። ጫና፣ ንጽጽር ወይም ፈጣን መፍትሄ ቃል ኪዳን ሳይኖር፣ ለእርስዎ ትርጉም ላለው እድገት ተግባራዊ ሐሳቦችን ያግኙ።', all: 'ሁሉም ርዕሶች', disclaimer: 'የዘመቻ ምስሎች ምሳሌያዊ ሞዴሎችን ያሳያሉ፤ የጤናሰዉ አባላት አይደሉም። እያንዳንዱ ካርድ በጤና ቤተ-መጽሐፍቱ ወዳለ ተዛማጅ የተገመገመ መመሪያ ይወስዳል።', explore: 'ቀጣዩን ትንሽ እርምጃ ያስሱ', read: 'በቤተ-መጽሐፍቱ ያስሱ'},
+  en: {
+    eyebrow: 'Your pace. Your kind of progress.',
+    heading: 'A little progress can mean a lot.',
+    intro: 'A steadier morning. Feeling more at home in your body. Moving in a way you enjoy. Find practical ideas for the progress that matters to you—with no pressure, comparison, or quick-fix promises.',
+    all: 'All topics',
+    disclaimer: 'Campaign visuals are illustrative models, not TenaSew members. Each card opens related, reviewed guidance in the wellness library.',
+    explore: 'Explore your next small step',
+    read: 'Explore in the library'
+  },
+  am: {
+    eyebrow: 'በራስዎ ፍጥነት፤ በራስዎ መንገድ።',
+    heading: 'ትንሽ እድገት ትልቅ ትርጉም አለው።',
+    intro: 'የተረጋጋ አነቃቃት፣ ከራስዎ አካል ጋር የተሻለ ሰላም፣ እና ደስ የሚል እንቅስቃሴ። ያለ ምንም ጫና፣ ንፅፅር ወይም የውሸት የተስፋ ቃል ለእርስዎ ትርጉም ላለው እድገት የሚሆኑ ተግባራዊ ሀሳቦችን ያግኙ።',
+    all: 'ሁሉም ርዕሶች',
+    disclaimer: 'ምስሎቹ ለግንዛቤ የታሰቡ ሞዴሎች እንጂ የጤናሰው አባላት አይደሉም። እያንዳንዱ ካርድ በጤና ቤተ-መጽሐፉ ወዳለው ተዛማጅ መመሪያ ይወስዳል።',
+    explore: 'ቀጣዩን ትንሽ እርምጃ ያስሱ',
+    read: 'በቤተ-መጽሐፉ ያስሱ'
+  },
 } as const;
 
 export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
@@ -74,7 +90,7 @@ export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
         {visible.map(({id, Icon, art, image, label, title, description, href, note}) => <Link href={href} className={`progress-card progress-${art}`} key={id}>
           <div className={`progress-art art-${art}`}>
             <img src={image} alt="" className="progress-art-image" loading="lazy" aria-hidden="true"/>
-            <span className="progress-art-type">{language === 'am' ? 'የዘመቻ ምስል · ምሳሌያዊ ሞዴል' : 'Campaign visual · illustrative model'}</span>
+            <span className="progress-art-type">{language === 'am' ? 'ምስላዊ ሞዴል' : 'Campaign visual · illustrative model'}</span>
             <span className="art-caption" aria-hidden="true">TenaSew</span>
           </div>
           <div className="progress-card-copy">
