@@ -457,9 +457,11 @@ body {
   .design-feature-row {
     grid-template-columns: 1fr;
     gap: 10px;
-    width: 100%;
+    width: min(100%, 370px);
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 24px;
-    padding: 0 4%;
+    padding: 0;
   }
   .design-feature {
     min-height: 58px;
@@ -479,7 +481,7 @@ body {
   .design-copy > p { font-size: 14px; }
   .design-actions { margin-top: 22px; }
   .design-primary, .design-secondary { min-height: 44px; }
-  .design-feature-row { padding: 0 2px; margin-top: 22px; gap: 8px; }
+  .design-feature-row { width: min(100%, 340px); padding: 0; margin-top: 22px; gap: 8px; }
   .design-feature { min-height: 54px; }
   .feature-icon { width: 30px; height: 30px; }
   .feature-icon svg { width: 16px; height: 16px; }
