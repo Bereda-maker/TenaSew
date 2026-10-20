@@ -114,7 +114,7 @@ export function Home() {
             <p>{hero.body}</p>
             <div className="design-actions">
               <Link href="/register" className="design-primary">{hero.start} <ArrowRight size={18}/></Link>
-              <Link href="#community-journeys" className="design-secondary">{hero.explore}</Link>
+              <Link href="#wellness-topics" className="design-secondary">{hero.explore}</Link>
             </div>
           </div>
           <div className="design-slogan" aria-label={`${hero.sloganTop} ${hero.sloganBottom}`}>{hero.sloganTop}<br/><em>{hero.sloganBottom}</em><span/></div>
