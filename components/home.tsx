@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {useEffect, useRef, useState} from 'react';
 import {ArrowRight, ArrowUpRight, BookOpen, Clock, Droplets, Dumbbell, Heart, Plus, Send, ShieldCheck, Sparkles, Sprout, Users} from 'lucide-react';
 import {resources} from '../lib/data';
+import {UserProgressShowcase} from './user-progress-showcase';
 
 type Language = 'en' | 'am';
 const languageEvent = 'tenasew-language-change';
@@ -101,7 +102,6 @@ function useReveal(dep: unknown) {
 export function Home() {
   const [language, setLanguage] = useState<Language>('en');
   const [focus, setFocus] = useState(0);
-  const [showAfter, setShowAfter] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -178,27 +178,8 @@ export function Home() {
       </div>
     </section>
 
-    {/* ---------- Before / after journey ---------- */}
-    <section className="ts-section ts-before-after-section">
-      <div className="shell">
-        <div className="ts-before-after-head reveal">
-          <div><div className="eyebrow">{language === 'am' ? 'ለውጥ በቀስታ' : 'Change, gently'}</div><h2>{language === 'am' ? 'ከጫና ወደ ሚዛን።' : 'From overwhelmed to supported.'}</h2></div>
-          <p>{language === 'am' ? 'ይህ ስለ ሰውነት መለወጥ አይደለም። ስለ ትንንሽ ልምዶች፣ ግልጽ እርምጃዎች እና ለራስ ርህራሄ ቦታ ስለመፍጠር ነው።' : 'This is not about changing your body. It is about making room for small habits, clearer next steps, and more compassion for yourself.'}</p>
-        </div>
-        <div className="ts-before-after reveal">
-          <div className="ts-before-after-image-wrap">
-            <img src={showAfter ? '/wellness-after.jpg' : '/wellness-before.jpg'} alt={showAfter ? (language === 'am' ? 'የተረጋጋ የዕለት ተዕለት ልምድ' : 'A calmer, more supported daily routine') : (language === 'am' ? 'በጫና የተሞላ የዕለት ተዕለት ልምድ' : 'An overwhelmed daily routine')} />
-            <span className="ts-before-after-label">{showAfter ? (language === 'am' ? 'ከትንንሽ እርምጃዎች በኋላ' : 'After small steps') : (language === 'am' ? 'ከመጀመር በፊት' : 'Before support')}</span>
-          </div>
-          <div className="ts-before-after-copy">
-            <span className="tag">{showAfter ? (language === 'am' ? 'የተሻለ ስሜት' : 'A better-feeling rhythm') : (language === 'am' ? 'የሚጀምሩበት ቦታ' : 'A place to begin')}</span>
-            <h3>{showAfter ? (language === 'am' ? 'ሁሉም ነገር ፍጹም መሆን አያስፈልገውም።' : 'It does not have to be perfect.') : (language === 'am' ? 'ቀኑ ከባድ ሲሆን ይህ የተለመደ ነው።' : 'Some days feel harder than others.')}</h3>
-            <p>{showAfter ? (language === 'am' ? 'ተግባራዊ ምርጫዎች እና ለራስ ርህራሄ በየቀኑ ሊደገሙ የሚችሉ የጤና ልምዶችን ይፈጥራሉ።' : 'Practical choices and self-compassion can create routines that are easier to return to, day after day.') : (language === 'am' ? 'ከየት እንደሚጀምሩ ካላወቁ፣ አንድ ትንሽ የሚቻል እርምጃ ይምረጡ።' : 'If you are not sure where to begin, choose one small step that feels possible today.')}</p>
-            <button type="button" className="button" aria-pressed={showAfter} onClick={() => setShowAfter(value => !value)}>{showAfter ? (language === 'am' ? 'ወደ መነሻው ተመለስ' : 'See the starting point') : (language === 'am' ? 'ለውጡን ይመልከቱ' : 'See the shift')} <ArrowRight size={16} style={{verticalAlign:'middle'}} /></button>
-          </div>
-        </div>
-      </div>
-    </section>
+    {/* ---------- Community progress showcase ---------- */}
+    <UserProgressShowcase language={language}/>
 
     {/* ---------- How it works ---------- */}
     <section className="ts-section ts-alt">
