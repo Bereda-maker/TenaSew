@@ -46,7 +46,7 @@ export function SiteNavbar(){
   const login = language === 'am' ? 'ግባ' : 'Log In';
   const journey = language === 'am' ? 'ጉዞዎን ይጀምሩ' : 'Start Your Journey';
 
-  return <header className="global-site-header">
+  return <header className={`global-site-header ${language === 'am' ? 'is-amharic' : ''}`}>
     <div className="global-nav-shell">
       <Link href="/" className="global-brand" aria-label="TenaSew home" onClick={()=>setOpen(false)}>
         <span className="global-logo-frame"><img src="/tenasew-logo.png" alt="" /></span>

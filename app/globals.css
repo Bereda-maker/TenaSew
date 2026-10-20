@@ -267,3 +267,36 @@ body{background:var(--cream);color:var(--ink)}
 .footer:before{display:none}
 .card,.resource-card,.form-card,.stat{animation:none}
 @media(max-width:520px){.section{padding:52px 0}.card,.resource-card{border-radius:16px}.page-hero,.inner-hero{padding-top:64px;padding-bottom:40px}}
+
+/* Amharic presentation: use an Ethiopic type system instead of inheriting English serif styling. */
+.is-amharic,.is-amharic *{font-family:'Noto Sans Ethiopic','Abyssinica SIL',system-ui,sans-serif}
+.landing-page.is-amharic .design-copy h1{font-family:'Noto Serif Ethiopic','Noto Sans Ethiopic','Abyssinica SIL',serif;font-weight:700;letter-spacing:0;line-height:1.18;max-width:620px}
+.landing-page.is-amharic .design-copy h1 em{font-family:'Noto Serif Ethiopic','Noto Sans Ethiopic','Abyssinica SIL',serif;font-style:normal;letter-spacing:0;line-height:1.18}
+.landing-page.is-amharic .design-eyebrow{font-size:14px;letter-spacing:.04em;text-transform:none;line-height:1.4}
+.landing-page.is-amharic .design-copy>p{font-size:16px;line-height:1.8;max-width:590px}
+.landing-page.is-amharic .design-primary,.landing-page.is-amharic .design-secondary{font-size:14px;line-height:1.5;padding:13px 21px}
+.landing-page.is-amharic .design-slogan{font-family:'Noto Serif Ethiopic','Noto Sans Ethiopic','Abyssinica SIL',serif;font-style:normal;line-height:1.45;letter-spacing:0;transform:rotate(-5deg)}
+.landing-page.is-amharic .design-slogan em{font-family:inherit;font-style:normal}
+.landing-page.is-amharic .design-feature{font-size:12px;line-height:1.45}
+.global-site-header.is-amharic .global-nav-links{font-size:14px;letter-spacing:0}
+.global-site-header.is-amharic .global-login,.global-site-header.is-amharic .global-cta{font-size:14px;letter-spacing:0}
+.global-site-header.is-amharic .global-mobile-menu a,.global-site-header.is-amharic .global-mobile-language{font-family:'Noto Sans Ethiopic','Abyssinica SIL',system-ui,sans-serif;line-height:1.6}
+@media(max-width:1120px){
+  .global-site-header.is-amharic .global-nav-links{font-size:12px}
+  .landing-page.is-amharic .design-copy h1{max-width:570px}
+}
+@media(max-width:820px){
+  .landing-page.is-amharic .design-copy h1{font-size:clamp(2.35rem,8.5vw,4rem);line-height:1.2;max-width:100%}
+  .landing-page.is-amharic .design-eyebrow{font-size:12px}
+  .landing-page.is-amharic .design-copy>p{font-size:14px;line-height:1.75}
+  .landing-page.is-amharic .design-primary,.landing-page.is-amharic .design-secondary{font-size:12px;padding:11px 14px}
+  .landing-page.is-amharic .design-slogan{font-size:14px;line-height:1.5}
+  .landing-page.is-amharic .design-feature{font-size:9px;line-height:1.35}
+}
+@media(max-width:500px){
+  .landing-page.is-amharic .design-copy h1{font-size:clamp(2.15rem,9.2vw,3.2rem);line-height:1.22}
+  .landing-page.is-amharic .design-copy>p{font-size:13px;line-height:1.7}
+  .landing-page.is-amharic .design-eyebrow{font-size:10px}
+  .landing-page.is-amharic .design-slogan{font-size:12px}
+  .landing-page.is-amharic .design-feature{font-size:8px}
+}

@@ -121,7 +121,7 @@ export function Home() {
   const hero = t.hero;
   const picked = resources.find(r => r.slug === focusSlugs[focus]) ?? resources[0];
 
-  return <div className="landing-page" ref={root}>
+  return <div className={`landing-page ${language === 'am' ? 'is-amharic' : ''}`} lang={language === 'am' ? 'am' : 'en'} ref={root}>
     {/* ---------- Hero (kept, now with a soft entrance) ---------- */}
     <section className="design-hero" aria-labelledby="design-hero-title">
       <img className="design-hero-image" src="/tenasew-hero-image.jpg" alt="A woman taking a peaceful moment in a green mountain landscape" />
