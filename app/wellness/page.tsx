@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {ArrowRight, Search} from 'lucide-react';
 import {resources} from '../../lib/data';
 import {useLanguage} from '../../components/use-language';
+import {PersonalizedRecommendations} from '../../components/personalized-recommendations';
 
 const categories = ['All', 'Body confidence', 'Healthy habits', 'Skin & hair care', 'Strength & movement', 'Nutrition', 'Movement', 'Skin care', 'Hair care', 'General wellness'];
 
@@ -39,6 +40,7 @@ export default function Wellness() {
         <p>{a ? 'ለሰውነት መተማመን፣ ለልምዶች፣ ለእንቅስቃሴ፣ ለምግብ፣ ለቆዳ፣ ለፀጉር እና ለዕለታዊ ጤና ተደራሽ መረጃዎችን ያስሱ።' : 'Explore approachable resources for body confidence, habits, movement, nutrition, skin, hair, and everyday wellbeing.'}</p>
       </div>
     </section>
+    <div className="shell"><PersonalizedRecommendations /></div>
     <section className="section">
       <div className="shell">
         <div className="library-toolbar">

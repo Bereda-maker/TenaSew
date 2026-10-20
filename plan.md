@@ -20,6 +20,12 @@ Chosen direction: **Warm editorial wellness**. Use forest green and warm cream a
 - `docs/`: deployment and architecture notes.
 - `tests/`: smoke checks for required files and route manifest.
 
+## Personalized wellness flow
+
+- `components/wellness-onboarding.tsx` owns the four-step, bilingual, optional questionnaire and keeps an unfinished draft in local storage so guests can explore without an account.
+- `app/api/preferences/route.ts` reuses `user_preferences` for account-backed persistence, storing the optional personalization fields inside the existing JSON preference column rather than creating duplicate tables.
+- `components/personalized-recommendations.tsx` ranks the existing reviewed resources by selected interests and goals; it never invents books or blocks general resources based on gender.
+
 ## Runtime and deployment
 
 Use Next.js on Vercel with GitHub production-branch deploys. Render is configured as a Node web-service option and can host a managed Postgres database for `DATABASE_URL`. AI is provider-neutral through environment variables and remains optional.
