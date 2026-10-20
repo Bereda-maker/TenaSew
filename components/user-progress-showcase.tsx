@@ -13,31 +13,32 @@ const categories: Array<{
   description: Record<Language, string>;
   Icon: typeof Heart;
   art: string;
+  image: string;
   note: Record<Language, string>;
 }> = [
   {
-    id: 'confidence', Icon: Heart, art: 'confidence',
+    id: 'confidence', Icon: Heart, art: 'confidence', image: '/progress-confidence.webp',
     label: {en: 'Body confidence', am: 'በራስ መተማመን'},
     title: {en: 'Progress is more than what you see in the mirror.', am: 'እድገት በመስታወት ከሚታየው በላይ ነው።'},
     description: {en: 'Celebrate the moments you begin to appreciate yourself, just as you are.', am: 'እራስዎን እንዳሉ ማድነቅ የጀመሩባቸውን ጊዜያት ያክብሩ።'},
     note: {en: 'Confidence has no before-and-after.', am: 'በራስ መተማመን የበፊትና በኋላ ለውጥ አይደለም።'},
   },
   {
-    id: 'habits', Icon: Leaf, art: 'habits',
+    id: 'habits', Icon: Leaf, art: 'habits', image: '/progress-habits.webp',
     label: {en: 'Healthy habits', am: 'ጤናማ ልምዶች'},
     title: {en: 'Small habits. Real-life progress.', am: 'ትንንሽ ልምዶች። እውነተኛ እድገት።'},
     description: {en: 'Discover how everyday choices can become meaningful parts of your life.', am: 'የዕለት ተዕለት ምርጫዎች ትርጉም ያላቸው የሕይወትዎ ክፍሎች ሲሆኑ ይመልከቱ።'},
     note: {en: 'No routine guarantees a particular outcome.', am: 'ማንኛውም ልምድ የተለየ ውጤት አያረጋግጥም።'},
   },
   {
-    id: 'care', Icon: Waves, art: 'care',
+    id: 'care', Icon: Waves, art: 'care', image: '/progress-care.webp',
     label: {en: 'Skin & hair care', am: 'የቆዳና ፀጉር እንክብካቤ'},
     title: {en: 'Your care journey, your own pace.', am: 'የእንክብካቤ ጉዞዎ በራስዎ ፍጥነት።'},
     description: {en: 'Explore real experiences, routines, and personal milestones shared by our community.', am: 'በማህበረሰባችን የተጋሩ እውነተኛ ተሞክሮዎችን፣ ልምዶችንና የግል ምዕራፎችን ያስሱ።'},
     note: {en: 'Care stories, never cure promises.', am: 'የእንክብካቤ ታሪኮች፤ የፈውስ ቃል ኪዳን አይደሉም።'},
   },
   {
-    id: 'movement', Icon: Sparkles, art: 'movement',
+    id: 'movement', Icon: Sparkles, art: 'movement', image: '/progress-movement.webp',
     label: {en: 'Strength & movement', am: 'ጉልበትና እንቅስቃሴ'},
     title: {en: 'Celebrate what your body can do.', am: 'ሰውነትዎ የሚያደርገውን ያክብሩ።'},
     description: {en: 'Every step, every movement, every milestone belongs to your journey.', am: 'እያንዳንዱ እርምጃ፣ እንቅስቃሴና ምዕራፍ የእርስዎ ጉዞ አካል ነው።'},
@@ -46,8 +47,8 @@ const categories: Array<{
 ];
 
 const words = {
-  en: {eyebrow: 'Real journeys, shared with care', heading: 'A little progress can mean a lot.', intro: 'A place for the everyday moments and personal milestones that make a wellbeing journey your own.', all: 'All journeys', gallery: 'Gallery', timeline: 'Timeline', emptyTitle: 'Community stories are on their way.', empty: 'No stories have been approved for public sharing yet. We will only feature stories people have chosen to share.', view: 'Explore this journey', previous: 'Previous category', next: 'Next category', disclaimer: 'Stories appear here only after a person chooses what to share and an administrator approves it.'},
-  am: {eyebrow: 'እውነተኛ ጉዞዎች፣ በጥንቃቄ የተጋሩ', heading: 'ትንሽ እድገት ትልቅ ትርጉም ሊኖረው ይችላል።', intro: 'የጤና ጉዞዎን የራስዎ የሚያደርጉትን የዕለት ተዕለት ጊዜያትና የግል ምዕራፎች የሚያከብር ቦታ።', all: 'ሁሉም ጉዞዎች', gallery: 'ማዕከለ-ስዕላት', timeline: 'የጊዜ ሰሌዳ', emptyTitle: 'የማህበረሰብ ታሪኮች በቅርቡ ይመጣሉ።', empty: 'ለህዝብ እንዲጋሩ የተፈቀዱ ታሪኮች ገና የሉም። ሰዎች ለማጋራት የመረጡትን ብቻ እናሳያለን።', view: 'ይህን ጉዞ ያስሱ', previous: 'የቀደመው ምድብ', next: 'ቀጣዩ ምድብ', disclaimer: 'ሰውዬው የሚጋራውን ከመረጠና አስተዳዳሪ ካጸደቀ በኋላ ብቻ ታሪኮች እዚህ ይታያሉ።'},
+  en: {eyebrow: 'Real journeys, shared with care', heading: 'A little progress can mean a lot.', intro: 'A place for the everyday moments and personal milestones that make a wellbeing journey your own.', all: 'All journeys', gallery: 'Gallery', timeline: 'Timeline', emptyTitle: 'Community stories are on their way.', empty: 'No stories have been approved for public sharing yet. We will only feature stories people have chosen to share.', previous: 'Previous category', next: 'Next category', disclaimer: 'Stories appear here only after a person chooses what to share and an administrator approves it.', illustration: 'AI illustration · not a community story'},
+  am: {eyebrow: 'እውነተኛ ጉዞዎች፣ በጥንቃቄ የተጋሩ', heading: 'ትንሽ እድገት ትልቅ ትርጉም ሊኖረው ይችላል።', intro: 'የጤና ጉዞዎን የራስዎ የሚያደርጉትን የዕለት ተዕለት ጊዜያትና የግል ምዕራፎች የሚያከብር ቦታ።', all: 'ሁሉም ጉዞዎች', gallery: 'ማዕከለ-ስዕላት', timeline: 'የጊዜ ሰሌዳ', emptyTitle: 'የማህበረሰብ ታሪኮች በቅርቡ ይመጣሉ።', empty: 'ለህዝብ እንዲጋሩ የተፈቀዱ ታሪኮች ገና የሉም። ሰዎች ለማጋራት የመረጡትን ብቻ እናሳያለን።', previous: 'የቀደመው ምድብ', next: 'ቀጣዩ ምድብ', disclaimer: 'ሰውዬው የሚጋራውን ከመረጠና አስተዳዳሪ ካጸደቀ በኋላ ብቻ ታሪኮች እዚህ ይታያሉ።', illustration: 'በAI የተፈጠረ ምሳሌያዊ ስዕል · የማህበረሰብ ታሪክ አይደለም'},
 } as const;
 
 export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
@@ -77,11 +78,11 @@ export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
         </div>
       </div>
       <div className={`progress-grid ${view === 'timeline' ? 'is-timeline' : ''}`}>
-        {visible.map(({id, Icon, art, label, title, description, note}, index) => <article className={`progress-card progress-${art}`} key={id}>
-          <div className={`progress-art art-${art}`} aria-hidden="true">
-            <span className="art-orbit orbit-one"/><span className="art-orbit orbit-two"/><span className="art-symbol"><Icon size={38} strokeWidth={1.35}/></span>
-            <span className="art-caption">TenaSew · {String(index + 1).padStart(2, '0')}</span>
-            {view === 'timeline' && <span className="art-timeline-mark"><span/><span/><span/></span>}
+        {visible.map(({id, Icon, art, image, label, title, description, note}) => <article className={`progress-card progress-${art}`} key={id}>
+          <div className={`progress-art art-${art}`}>
+            <img src={image} alt="" className="progress-art-image" loading="lazy" aria-hidden="true"/>
+            <span className="progress-art-type">{text.illustration}</span>
+            <span className="art-caption" aria-hidden="true">TenaSew</span>
           </div>
           <div className="progress-card-copy">
             <div className="progress-category"><span className={`progress-dot dot-${art}`}/>{label[language]}</div>
