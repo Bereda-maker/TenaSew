@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useEffect, useRef, useState} from 'react';
-import {ArrowRight, ArrowUpRight, BookOpen, Clock, Droplets, Dumbbell, Heart, Plus, Send, ShieldCheck, Sparkles, Sprout, Users} from 'lucide-react';
+import {ArrowRight, BookOpen, Clock, Heart, Plus, Send, ShieldCheck, Sparkles, Users} from 'lucide-react';
 import {resources} from '../lib/data';
 import {UserProgressShowcase} from './user-progress-showcase';
 
@@ -11,15 +11,8 @@ const languageEvent = 'tenasew-language-change';
 /* ---------- Copy (English + Amharic) ---------- */
 const copy = {
   en: {
-    hero: {eyebrow: 'Your wellness. Your journey.', before: 'Your journey to', em: 'feeling better', after: 'starts here.', body: 'TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.', start: 'Start Your Journey', explore: 'Explore Wellness', sloganTop: 'A healthier', sloganBottom: 'happier you', features: ['Personalized Wellness', 'Body Confidence', 'AI-Powered Guidance']},
+    hero: {eyebrow: 'Your wellness. Your journey.', before: 'Your journey to', em: 'feeling better', after: 'starts here.', body: 'TenaSew brings together personalized wellness guidance, body confidence resources, healthy habits, and AI-powered support to help you care for yourself on your own terms.', start: 'Start Your Journey', explore: 'See what progress can mean', sloganTop: 'A healthier', sloganBottom: 'happier you', features: ['Personalized Wellness', 'Body Confidence', 'AI-Powered Guidance']},
     marquee: ['Body confidence', 'Healthy habits', 'Skin care', 'Hair care', 'Balanced meals', 'Gentle strength', 'Rest', 'Built with care in Ethiopia'],
-    support: {eyebrow: 'Support that meets you where you are', title: 'Your wellbeing is more than a before-and-after.', text: 'Choose what matters to you. Skip what doesn’t. Change your direction as life changes.', explore: 'Explore'},
-    tiles: [
-      {title: 'Body confidence', text: 'Build a kinder, more grounded relationship with your body.', href: '/body-confidence'},
-      {title: 'Healthy habits', text: 'Small routines for food, movement, rest, and everyday energy.', href: '/wellness'},
-      {title: 'Skin & hair care', text: 'Learn approachable care basics for every texture and tone.', href: '/wellness'},
-      {title: 'Strength & movement', text: 'Explore safe ways to feel stronger, wherever you are.', href: '/wellness'},
-    ],
     how: {eyebrow: 'How TenaSew works', title: 'Small steps. Real context. No shame.', lead: 'We turn good intentions into doable next steps, while keeping the bigger picture in view: confidence isn’t conditional on appearance.',
       steps: [
         {t: 'Tell us what support looks like', p: 'Pick interests and goals at your pace. You can always change them later.'},
@@ -40,15 +33,8 @@ const copy = {
     cta: {title: 'Take one small step today.', text: 'No pressure, no perfection — just a gentle place to begin.', primary: 'Start Your Journey', secondary: 'Browse the library'},
   },
   am: {
-    hero: {eyebrow: 'የጤና ባለቤትዎ እርስዎ ነዎት።', before: 'ጤናማና', em: 'ደስተኛ ሕይወት', after: 'ለመምራት የሚጀምሩበት ቦታ።', body: 'ጤናሰዉ ከእርስዎ የአኗኗር ዘይቤ ጋር የሚጣጣም የጤና እንክብካቤ፣ የተመጣጠነ ምግብ አጠቃቀም፣ በራስ የመተማመን ስሜት እና በቴክኖሎጂ የታገዘ አጭር ምክር በአንድ ላይ ይዞልዎ መጥቷል።', start: 'ጉዞዎን ይጀምሩ', explore: 'ጤናማ ኑሮን ያስሱ', sloganTop: 'ጤናማ፣', sloganBottom: 'ደስተኛ እና የተረጋጋ ሕይወት', features: ['ግላዊ የጤና እንክብካቤ', 'በራስ መተማመን', 'የAI እገዛ እና ምክር']},
+    hero: {eyebrow: 'የጤና ባለቤትዎ እርስዎ ነዎት።', before: 'ጤናማና', em: 'ደስተኛ ሕይወት', after: 'ለመምራት የሚጀምሩበት ቦታ።', body: 'ጤናሰዉ ከእርስዎ የአኗኗር ዘይቤ ጋር የሚጣጣም የጤና እንክብካቤ፣ የተመጣጠነ ምግብ አጠቃቀም፣ በራስ የመተማመን ስሜት እና በቴክኖሎጂ የታገዘ አጭር ምክር በአንድ ላይ ይዞልዎ መጥቷል።', start: 'ጉዞዎን ይጀምሩ', explore: 'እድገት ምን ማለት እንደሆነ ይመልከቱ', sloganTop: 'ጤናማ፣', sloganBottom: 'ደስተኛ እና የተረጋጋ ሕይወት', features: ['ግላዊ የጤና እንክብካቤ', 'በራስ መተማመን', 'የAI እገዛ እና ምክር']},
     marquee: ['በራስ መተማመን', 'ጤናማ ልምዶች', 'የቆዳ እንክብካቤ', 'የፀጉር እንክብካቤ', 'የቤት ውስጥ ጤናማ ምግቦች', 'ቀላል የአካል ብቃት እንቅስቃሴ', 'ጥሩ እረፍት', 'በኢትዮጵያ በፍቅር የተዘጋጀ'],
-    support: {eyebrow: 'ባሉበት ሆነው ሊያገኙት የሚችሉት ድጋፍ', title: 'እውነተኛ ደህንነት ከውጪ ከሚታይ ገጽታ በላይ ነው።', text: 'የሚፈልጉትን ይምረጡ፤ የማይስማማዎትን ይለፉ። ሕይወት ሲለወጥ አብሮ ማስተካከል ይቻላል።', explore: 'ይመልከቱ'},
-    tiles: [
-      {title: 'በራስ መተማመን', text: 'ከራሳችን አካል ጋር ሰላም መፍጠር እና ጤናማ ግንኙነት መገንባት።', href: '/body-confidence'},
-      {title: 'ጤናማ ልምዶች', text: 'ለአመጋገብ፣ ለእነቃቃ እንቅስቃሴ፣ ለእረፍት እና ለዕለት ተዕለት ጉልበት የሚሆኑ ትናንሽ ልምዶች።', href: '/wellness'},
-      {title: 'የቆዳና ፀጉር እንክብካቤ', text: 'ለሁሉም የቆዳ ቀለም እና የፀጉር አይነት የሚስማሙ ቀላል የቤት ውስጥ እንክብካቤ መንገዶች።', href: '/wellness'},
-      {title: 'ጉልበትና እንቅስቃሴ', text: 'የትም ቦታ ቢሆኑ በቀላሉ ሊያደርጓቸው የሚችሉ ጤናማ የአካል እንቅስቃሴዎች።', href: '/wellness'},
-    ],
     how: {eyebrow: 'ጤናሰዉ እንዴት ይሰራል?', title: 'ቀላል እርምጃዎች። እውነተኛ ሕይወት። ያለ አላስፈላጊ ጫና።', lead: 'ጥሩ ሐሳቦችን ወደ ተግባር እንለውጣለን፤ ትልቁ ጉዳይ ግን ውበት ብቻ ሳይሆን ውስጣዊ ጤንነትዎ መሆኑን እናምናለን።',
       steps: [
         {t: 'የሚፈልጉትን ድጋፍ ይንገሩን', p: 'በራስዎ ፍጥነት የሚወዷቸውን ጉዳዮች ይምረጡ። በሂደት መቀየርም ይችላሉ።'},
@@ -69,13 +55,6 @@ const copy = {
     cta: {title: 'ዛሬውኑ አነስተኛ እርምጃ ይውሰዱ።', text: 'ያለ ምንም ጫና እና ፍጹምነት — ለመጀመር ምቹ ቦታ።', primary: 'ጉዞዎን ይጀምሩ', secondary: 'ጽሑፎቹን ያስሱ'},
   },
 } as const;
-
-const tileMeta = [
-  {tone: 'forest', Icon: Heart},
-  {tone: 'mint', Icon: Sprout},
-  {tone: 'sand', Icon: Droplets},
-  {tone: 'clay', Icon: Dumbbell},
-] as const;
 
 const focusSlugs = ['confidence-without-comparison', 'local-foods-balanced-plate', 'beginner-strength', 'simple-skin-routine', 'care-for-natural-hair', 'rest-is-a-practice'];
 const toneOf: Record<string, string> = {'Body confidence': 'clay', 'Nutrition': 'sand', 'Movement': 'mint', 'Skin care': 'mint', 'Hair care': 'clay', 'General wellness': 'sand'};
@@ -135,7 +114,7 @@ export function Home() {
             <p>{hero.body}</p>
             <div className="design-actions">
               <Link href="/register" className="design-primary">{hero.start} <ArrowRight size={18}/></Link>
-              <Link href="/wellness" className="design-secondary">{hero.explore}</Link>
+              <Link href="#community-journeys" className="design-secondary">{hero.explore}</Link>
             </div>
           </div>
           <div className="design-slogan" aria-label={`${hero.sloganTop} ${hero.sloganBottom}`}>{hero.sloganTop}<br/><em>{hero.sloganBottom}</em><span/></div>
@@ -156,27 +135,6 @@ export function Home() {
         {[...t.marquee, ...t.marquee].map((item, i) => <span key={i}><i/>{item}</span>)}
       </div>
     </div>
-
-    {/* ---------- Support bento ---------- */}
-    <section className="ts-section">
-      <div className="shell">
-        <div className="ts-head reveal">
-          <div><div className="eyebrow">{t.support.eyebrow}</div><h2>{t.support.title}</h2></div>
-          <p>{t.support.text}</p>
-        </div>
-        <div className="ts-bento">
-          {t.tiles.map((tile, i) => {
-            const {tone, Icon} = tileMeta[i];
-            return <Link key={i} href={tile.href} className={`ts-tile tone-${tone} reveal`} style={{transitionDelay: `${i * 70}ms`}}>
-              <span className="ts-tile-no" aria-hidden="true">0{i + 1}</span>
-              <span className="ts-tile-icon"><Icon size={26} strokeWidth={1.8}/></span>
-              <div><h3>{tile.title}</h3><p>{tile.text}</p></div>
-              <span className="ts-tile-link">{t.support.explore} <ArrowUpRight size={17}/></span>
-            </Link>;
-          })}
-        </div>
-      </div>
-    </section>
 
     {/* ---------- Community progress showcase ---------- */}
     <UserProgressShowcase language={language}/>
