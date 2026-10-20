@@ -1,6 +1,7 @@
 'use client';
 
 import {useState} from 'react';
+import Link from 'next/link';
 import {ArrowLeft, ArrowRight, Clock3, Heart, Leaf, MoveUpRight, Sparkles, Waves} from 'lucide-react';
 
 type Language = 'en' | 'am';
@@ -47,8 +48,8 @@ const categories: Array<{
 ];
 
 const words = {
-  en: {eyebrow: 'Real journeys, shared with care', heading: 'A little progress can mean a lot.', intro: 'A place for the everyday moments and personal milestones that make a wellbeing journey your own.', all: 'All journeys', gallery: 'Gallery', timeline: 'Timeline', emptyTitle: 'Community stories are on their way.', empty: 'No stories have been approved for public sharing yet. We will only feature stories people have chosen to share.', previous: 'Previous category', next: 'Next category', disclaimer: 'Stories appear here only after a person chooses what to share and an administrator approves it.', illustration: 'AI illustration · not a community story'},
-  am: {eyebrow: 'እውነተኛ ጉዞዎች፣ በጥንቃቄ የተጋሩ', heading: 'ትንሽ እድገት ትልቅ ትርጉም ሊኖረው ይችላል።', intro: 'የጤና ጉዞዎን የራስዎ የሚያደርጉትን የዕለት ተዕለት ጊዜያትና የግል ምዕራፎች የሚያከብር ቦታ።', all: 'ሁሉም ጉዞዎች', gallery: 'ማዕከለ-ስዕላት', timeline: 'የጊዜ ሰሌዳ', emptyTitle: 'የማህበረሰብ ታሪኮች በቅርቡ ይመጣሉ።', empty: 'ለህዝብ እንዲጋሩ የተፈቀዱ ታሪኮች ገና የሉም። ሰዎች ለማጋራት የመረጡትን ብቻ እናሳያለን።', previous: 'የቀደመው ምድብ', next: 'ቀጣዩ ምድብ', disclaimer: 'ሰውዬው የሚጋራውን ከመረጠና አስተዳዳሪ ካጸደቀ በኋላ ብቻ ታሪኮች እዚህ ይታያሉ።', illustration: 'በAI የተፈጠረ ምሳሌያዊ ስዕል · የማህበረሰብ ታሪክ አይደለም'},
+  en: {eyebrow: 'Real journeys, shared with care', heading: 'A little progress can mean a lot.', intro: 'No transformations to chase. Find thoughtful ideas for the everyday moments and personal milestones that make wellbeing your own.', all: 'All journeys', gallery: 'Gallery', timeline: 'Timeline', emptyTitle: 'Community stories are on their way.', empty: 'No stories have been approved for public sharing yet. We will only feature stories people have chosen to share.', previous: 'Previous category', next: 'Next category', disclaimer: 'Stories appear here only after a person chooses what to share and an administrator approves it.', illustration: 'AI-created campaign image · not a real member', explore: 'Find your next small step'},
+  am: {eyebrow: 'እውነተኛ ጉዞዎች፣ በጥንቃቄ የተጋሩ', heading: 'ትንሽ እድገት ትልቅ ትርጉም ሊኖረው ይችላል።', intro: 'ለመከተል ለውጥ አያስፈልግም። ጤናዎን የራስዎ የሚያደርጉትን የዕለት ተዕለት ጊዜያትና የግል ምዕራፎች የሚያበረታቱ ሐሳቦችን ያግኙ።', all: 'ሁሉም ጉዞዎች', gallery: 'ማዕከለ-ስዕላት', timeline: 'የጊዜ ሰሌዳ', emptyTitle: 'የማህበረሰብ ታሪኮች በቅርቡ ይመጣሉ።', empty: 'ለህዝብ እንዲጋሩ የተፈቀዱ ታሪኮች ገና የሉም። ሰዎች ለማጋራት የመረጡትን ብቻ እናሳያለን።', previous: 'የቀደመው ምድብ', next: 'ቀጣዩ ምድብ', disclaimer: 'ሰውዬው የሚጋራውን ከመረጠና አስተዳዳሪ ካጸደቀ በኋላ ብቻ ታሪኮች እዚህ ይታያሉ።', illustration: 'በAI የተፈጠረ የዘመቻ ምስል · እውነተኛ አባል አይደለም', explore: 'ቀጣዩን ትንሽ እርምጃ ይፈልጉ'},
 } as const;
 
 export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
@@ -65,7 +66,7 @@ export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
     <div className="progress-shell">
       <header className="progress-heading">
         <div><span className="progress-eyebrow"><span aria-hidden="true">✳</span> {text.eyebrow}</span><h2 id="progress-title">{text.heading}</h2></div>
-        <p>{text.intro}</p>
+        <div className="progress-heading-action"><p>{text.intro}</p><Link href="/wellness" className="progress-explore-link">{text.explore}<ArrowRight size={15}/></Link></div>
       </header>
       <div className="progress-toolbar">
         <div className="progress-filters" role="group" aria-label={text.all}>
@@ -82,6 +83,7 @@ export function UserProgressShowcase({language = 'en'}: {language?: Language}) {
           <div className={`progress-art art-${art}`}>
             <img src={image} alt="" className="progress-art-image" loading="lazy" aria-hidden="true"/>
             <span className="progress-art-type">{text.illustration}</span>
+            {view === 'timeline' && <span className="progress-timeline-preview">{text.timeline} · {language === 'am' ? 'ቅድመ እይታ' : 'preview'}</span>}
             <span className="art-caption" aria-hidden="true">TenaSew</span>
           </div>
           <div className="progress-card-copy">
