@@ -119,12 +119,6 @@ export function Home() {
           </div>
           <div className="design-slogan" aria-label={`${hero.sloganTop} ${hero.sloganBottom}`}>{hero.sloganTop}<br/><em>{hero.sloganBottom}</em><span/></div>
         </div>
-        <div className="design-feature-row">
-          {[{href: '/wellness', Icon: Sparkles}, {href: '/body-confidence', Icon: Heart}, {href: '/ai', Icon: Sparkles}].map((f, i) => {
-            const words = hero.features[i].split(' ');
-            return <Link key={f.href + i} href={f.href} className="design-feature"><span className="feature-icon"><f.Icon size={20}/></span><span>{words[0]}<br/><b>{words.slice(1).join(' ')}</b></span><ArrowRight size={16}/></Link>;
-          })}
-        </div>
         <div className="design-scroll" aria-hidden="true"><span>⌄</span></div>
       </div>
     </section>

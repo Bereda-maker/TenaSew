@@ -439,7 +439,7 @@ body {
   .design-hero-content {
     padding-left: clamp(3%, 5vw, 7%);
     padding-right: clamp(3%, 5vw, 7%);
-    padding-bottom: clamp(76px, 9vh, 116px);
+    padding-bottom: clamp(28px, 4vh, 52px);
   }
   .design-feature-row { margin-left: clamp(3%, 5vw, 7%); margin-top: 0; }
 }
