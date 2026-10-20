@@ -447,6 +447,8 @@ body {
 @media (max-width: 820px) {
   .global-menu-button { display: inline-flex; }
   .global-nav-actions { margin-left: auto; }
+  .design-hero,
+  .design-hero-inner { min-height: auto; }
   .design-hero-inner { width: calc(100% - 28px); padding-bottom: 24px; }
   .design-hero-content {
     padding: clamp(80px, 14vh, 132px) 4% 0;
