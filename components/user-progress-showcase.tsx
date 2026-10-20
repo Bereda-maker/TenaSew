@@ -19,7 +19,7 @@ const categories: Array<{
   note: Record<Language, string>;
 }> = [
   {
-    id: 'confidence', Icon: Heart, art: 'confidence', image: '/progress-confidence.webp', href: '/wellness?category=Body%20confidence',
+    id: 'confidence', Icon: Heart, art: 'confidence', image: '/conf.png', href: '/wellness?category=Body%20confidence',
     label: {en: 'Body confidence', am: 'በራስ መተማመን'},
     title: {en: 'Progress is more than what you see in the mirror.', am: 'እድገት በመስታወት ከሚታየው በላይ ነው።'},
     description: {en: 'Build a kinder relationship with your body, without making appearance the goal.', am: 'ገጽታን ግብ ሳያደርጉ ከሰውነትዎ ጋር የበለጠ ደግ ግንኙነት ይገንቡ።'},
