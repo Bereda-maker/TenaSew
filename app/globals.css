@@ -436,12 +436,17 @@ body {
 .landing-page.is-amharic .design-eyebrow { letter-spacing: .02em; }
 
 @media (min-width: 821px) {
-  .design-hero-content { padding-left: clamp(3%, 5vw, 7%); padding-right: clamp(3%, 5vw, 7%); }
-  .design-feature-row { margin-left: clamp(3%, 5vw, 7%); }
+  .design-hero-content {
+    padding-left: clamp(3%, 5vw, 7%);
+    padding-right: clamp(3%, 5vw, 7%);
+    padding-bottom: clamp(76px, 9vh, 116px);
+  }
+  .design-feature-row { margin-left: clamp(3%, 5vw, 7%); margin-top: 0; }
 }
 
 @media (max-width: 820px) {
   .global-menu-button { display: inline-flex; }
+  .global-nav-actions { margin-left: auto; }
   .design-hero-inner { width: calc(100% - 28px); padding-bottom: 24px; }
   .design-hero-content {
     padding: clamp(80px, 14vh, 132px) 4% 0;
