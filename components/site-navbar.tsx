@@ -22,7 +22,7 @@ const languageEvent = 'tenasew-language-change';
 export function SiteNavbar(){
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('am');
 
   useEffect(()=>{
     const saved = window.localStorage.getItem('tenasew-language');

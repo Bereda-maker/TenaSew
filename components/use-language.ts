@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 export type Language = 'en' | 'am';
 export const languageEvent = 'tenasew-language-change';
 export function useLanguage(){
-  const [language,setLanguage]=useState<Language>('en');
+  const [language,setLanguage]=useState<Language>('am');
   useEffect(()=>{
     const saved=window.localStorage.getItem('tenasew-language');
     if(saved==='am'||saved==='en') setLanguage(saved);
