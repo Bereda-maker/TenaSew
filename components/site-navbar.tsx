@@ -9,9 +9,9 @@ type Language = 'en' | 'am';
 
 const links = [
   {en: 'Home', am: 'መነሻ', href: '/'},
-  {en: 'Wellness', am: 'ደህንነት', href: '/wellness'},
-  {en: 'Body Confidence', am: 'የሰውነት እምነት', href: '/body-confidence'},
-  {en: 'AI Assistant', am: 'AI ረዳት', href: '/ai'},
+  {en: 'Wellness', am: 'ጤናና ደህንነት', href: '/wellness'},
+  {en: 'Body Confidence', am: 'ራስን ማመን', href: '/body-confidence'},
+  {en: 'AI Assistant', am: 'ጤናሰዉ AI', href: '/ai'},
   {en: 'Resources', am: 'መረጃዎች', href: '/resources'},
   {en: 'About', am: 'ስለ እኛ', href: '/about'},
   {en: 'Contact', am: 'ያግኙን', href: '/contact'},
@@ -43,14 +43,14 @@ export function SiteNavbar(){
   };
   const isActive = (href:string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
   const label = (item:{en:string;am:string}) => language === 'am' ? item.am : item.en;
-  const login = language === 'am' ? 'ግባ' : 'Log In';
+  const login = language === 'am' ? 'ይግቡ' : 'Log In';
   const journey = language === 'am' ? 'ጉዞዎን ይጀምሩ' : 'Start Your Journey';
 
   return <header className={`global-site-header ${language === 'am' ? 'is-amharic' : ''}`}>
     <div className="global-nav-shell">
       <Link href="/" className="global-brand" aria-label="TenaSew home" onClick={()=>setOpen(false)}>
         <span className="global-logo-frame"><img src="/tenasew-logo.png" alt="" /></span>
-        <span className="global-brand-copy"><strong>TenaSew</strong><small>ጤናሰው</small></span>
+        <span className="global-brand-copy"><strong>TenaSew</strong><small>ጤናሰዉ</small></span>
       </Link>
       <nav className="global-nav-links" aria-label="Primary navigation">
         {links.map(link=><Link key={link.href} href={link.href} className={isActive(link.href)?'active':''}>{label(link)}</Link>)}
