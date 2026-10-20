@@ -10,7 +10,7 @@ type Language = 'en' | 'am';
 const links = [
   {en: 'Home', am: 'መነሻ', href: '/'},
   {en: 'Wellness', am: 'ጤናና ደህንነት', href: '/wellness'},
-  {en: 'Body Confidence', am: 'ራስን ማመን', href: '/body-confidence'},
+  {en: 'Body Confidence', am: 'በራስ መተማመን', href: '/body-confidence'},
   {en: 'AI Assistant', am: 'ጤናሰዉ AI', href: '/ai'},
   {en: 'Resources', am: 'መረጃዎች', href: '/resources'},
   {en: 'About', am: 'ስለ እኛ', href: '/about'},
